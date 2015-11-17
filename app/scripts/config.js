@@ -1,13 +1,14 @@
 'use strict';
 
 // Init the application configuration module for AngularJS application
+/* jshint ignore:start */
 var ApplicationConfiguration = (function () {
 
   // Init module configuration options
   var applicationModuleName = 'mean';
 
   var applicationModuleVendorDependencies = [
-    /*'ngAnimate',
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
     'ui.utils',
@@ -27,7 +28,7 @@ var ApplicationConfiguration = (function () {
     'ngFileUpload',
     'ncy-angular-breadcrumb',
     'angularSpinner',
-    'angular-ui-view-spinner'*/
+    'angular-ui-view-spinner'
   ];
 
   // Add a new vertical module
@@ -46,3 +47,4 @@ var ApplicationConfiguration = (function () {
   };
 
 })();
+/* jshint ignore:end */
