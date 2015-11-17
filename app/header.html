@@ -1,0 +1,86 @@
+<div class="navbar-header">
+  <button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a data-ui-sref="home" class="navbar-brand">
+    <img src="/images/logo-sistcoop.svg" alt="Sistcoop Enterprise application">
+  </a>
+</div>
+
+<div class="" data-ng-controller="HeaderController">
+  <div class="uib-collapse navbar-collapse navbar-collapse-1" uib-collapse="!isCollapsed" role="navigation">
+    <ul class="nav navbar-nav navbar-primary">
+      <li data-ng-repeat="item in menu.items | orderBy: 'position'" ng-switch="item.type" data-ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'uib-dropdown' }" class="{{item.class}}" uib-dropdown="item.type === 'uib-dropdown'">
+        <a ng-switch-when="uib-dropdown" class="uib-dropdown-toggle" uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
+        <ul ng-switch-when="uib-dropdown" class="uib-dropdown-menu">
+          <li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ui-sref-active="active">
+            <a data-ui-sref="{{subitem.state}}" data-ng-bind="subitem.title"></a>
+          </li>
+        </ul>
+        <a ng-switch-default data-ui-sref="{{item.state}}" data-ng-bind="item.title"></a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-utility">
+      <li>
+        <a href="">
+          <strong>Rol: </strong>
+          <span ng-bind="user.roles.toString()"></span>
+
+          <span ng-if="session.caja">(</span>
+          <span ng-if="session.caja" ng-bind="session.caja.denominacion"></span>
+          <span ng-if="session.caja">)</span>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <strong>Usuario: </strong>
+          <span ng-bind="user.username"></span>
+        </a>
+      </li>
+      <li class="uib-dropdown" uib-dropdown>
+        <a href="#" class="uib-dropdown" uib-dropdown-toggle>
+          <span>Session</span>
+          <span class="pficon pficon-add-circle-o"></span>
+        </a>
+        <div class="uib-dropdown-menu infotip bottom-right">
+          <div class="arrow"></div>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="i fa fa-angle-double-right"></span>
+              <span>Direccion regional: </span>
+              <span ng-bind="agencia.denominacion"></span>
+              <span ng-if="!agencia">No definido</span>
+            </li>
+            <li class="list-group-item">
+              <span class="i fa fa-angle-double-right"></span>
+              <span>Trabajador: </span>
+              <span ng-bind="trabajador.tipoDocumento"></span>
+              <span ng-bind="trabajador.numeroDocumento"></span>
+              <span ng-if="!trabajador">No definido</span>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="uib-dropdown" uib-dropdown>
+        <a href="#" class="dropdown" uib-dropdown-toggle>
+          <span class="pficon pficon-user"></span>
+          <span class="username">{{user.fullName || user.metadata.name}}</span> <b class="caret"></b>
+        </a>
+        <ul class="uib-dropdown-menu">
+          <li>
+            <a href="" data-ng-click="accountManagement()">Account</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="" data-ng-click="logout()">Log out</a>
+          </li>
+        </ul>
+      </li>
+
+
+    </ul>
+  </div>
+</div>

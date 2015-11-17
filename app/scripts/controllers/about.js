@@ -7,11 +7,11 @@
  * # AboutCtrl
  * Controller of the meanApp
  */
-/*angular.module('meanApp')
+angular.module('mean')
   .controller('AboutCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });*/
+  });
