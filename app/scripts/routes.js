@@ -15,7 +15,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'views/home.html'
+        templateUrl: 'home.html'
       })
       .state('not-found', {
         url: '/not-found',
