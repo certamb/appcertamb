@@ -5,6 +5,15 @@
 angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies);
 /* jshint ignore:end */
 
+// Setting HTML5 Location Mode
+/* jshint ignore:start */
+angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider',
+  function($locationProvider) {
+    $locationProvider.hashPrefix('!');
+  }
+]);
+/* jshint ignore:end */
+
 //Then define the init function for starting up the application
 /* jshint ignore:start */
 angular.element(document).ready(function () {
