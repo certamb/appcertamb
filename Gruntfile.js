@@ -28,6 +28,9 @@ module.exports = function (grunt) {
   // Load auto source load
   grunt.loadNpmTasks('grunt-include-source');
 
+  // Load war generator
+  grunt.loadNpmTasks('grunt-war');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -209,13 +212,13 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       },
       test: {
         devDependencies: true,
         src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
+        ignorePath: /\.\.\//,
+        fileTypes: {
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
             detect: {
@@ -490,6 +493,36 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.app %>/index.html': '<%= yeoman.app %>/index.tpl.html'
         }
+      }
+    },
+
+    /*
+     * Build a WAR (web archive) without Maven or the JVM installed. carlos
+     */
+    /*
+     * Build a WAR (web archive) without Maven or the JVM installed.
+     */
+    war: {
+      target: {
+        options: {
+          war_dist_folder: '<%= yeoman.dist %>',
+          war_name: 'mean',
+          webxml_welcome: 'index.html',
+          webxml_display_name: 'Mean',
+          webxml_mime_mapping: [
+            {
+              extension: 'woff',
+              mime_type: 'application/font-woff'
+            }]
+        },
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.dist %>',
+            src: ['**'],
+            dest: ''
+          }
+        ]
       }
     }
   });
