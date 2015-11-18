@@ -25,6 +25,9 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
+  // Load auto source load
+  grunt.loadNpmTasks('grunt-include-source');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -64,6 +67,10 @@ module.exports = function (grunt) {
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      },
+      includeSource: {
+        files: ['<%= yeoman.app %>/index.html'],
+        tasks: ['includeSource:server']
       }
     },
 
@@ -211,14 +218,14 @@ module.exports = function (grunt) {
         fileTypes:{
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
             }
           }
+        }
       },
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -362,7 +369,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html'],
+          src: ['*.html', 'views/**/*.html', 'modules/***/views/**/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -411,7 +418,7 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '*.html',
+            '*.html', 'views/**/*.html', 'modules/***/views/**/*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
@@ -466,6 +473,24 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    // Include source
+    includeSource: {
+      options: {
+        basePath: 'app',
+        baseUrl: '/'
+      },
+      server: {
+        files: {
+          '.tmp/index.html': '<%= yeoman.app %>/index.html'
+        }
+      },
+      dist: {
+        files: {
+          '<%= yeoman.app %>/index.html': '<%= yeoman.app %>/index.tpl.html'
+        }
+      }
     }
   });
 
@@ -477,6 +502,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'includeSource:dist',
       'wiredep',
       'concurrent:server',
       'postcss:server',
@@ -501,6 +527,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'includeSource:dist',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',

@@ -64,7 +64,6 @@ module.exports = function(config) {
       'bower_components/c3/c3.js',
       'bower_components/angular-patternfly/dist/angular-patternfly.js',
       'bower_components/jquery-ui/jquery-ui.js',
-      'bower_components/gojs/release/go-debug.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/config.js",
