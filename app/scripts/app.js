@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 /*angular
-  .module('meanApp', [
+  .module('mean', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

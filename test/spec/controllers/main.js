@@ -1,9 +1,10 @@
 'use strict';
 
+/*global ApplicationConfiguration:false */
 describe('Controller: MainCtrl', function () {
 
-  // load the controller's module
-  beforeEach(module('mean'));
+  // Load the main application module
+  beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
   var MainCtrl,
     scope;

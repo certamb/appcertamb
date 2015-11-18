@@ -7,6 +7,7 @@ module.exports = function(config) {
   'use strict';
 
   config.set({
+
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
@@ -66,6 +67,8 @@ module.exports = function(config) {
       'bower_components/gojs/release/go-debug.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
+      "app/scripts/config.js",
+      "app/scripts/init.js",
       "app/scripts/**/*.js",
       "test/mock/**/*.js",
       "test/spec/**/*.js"
