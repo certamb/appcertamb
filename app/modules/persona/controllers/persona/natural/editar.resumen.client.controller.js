@@ -12,7 +12,7 @@ angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.Resum
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/modules/persona/client/views/natural/form-editar-cambiarFoto.html',
+                templateUrl: 'modules/persona/views/natural/form-editar-cambiarFoto.html',
                 controller: 'Persona.Natural.EditarPersonaNatural.CambiarFotoModalController',
                 size: 'lg',
                 resolve: {
