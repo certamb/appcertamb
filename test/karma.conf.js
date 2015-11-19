@@ -25,7 +25,6 @@ module.exports = function(config) {
       // bower:js
       'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
-      'bower_components/patternfly/dist/js/patternfly.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-resource/angular-resource.js',
@@ -66,6 +65,7 @@ module.exports = function(config) {
       'bower_components/jquery-ui/jquery-ui.js',
       'bower_components/gojs/release/go-debug.js',
       'bower_components/certamb-js/dist/certamb.js',
+      'bower_components/patternfly-sass/assets/javascripts/patternfly.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/config.js",

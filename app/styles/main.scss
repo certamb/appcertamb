@@ -1,5 +1,12 @@
-$icon-font-path: "../bower_components/patternfly-sass/assets/fonts/patternfly/";
+$icon-font-path: "../styles/fonts/bootstrap/";
+
+$font-path: "../styles/fonts/patternfly";
+$fa-font-path: "../styles/fonts/font-awesome/";
+$navbar-pf-bg-color: #09290f !default; //#393F45
+$link-color: #29bb45 !default;
+$dropdown-link-active-border-color: #18a03d !default;
 // bower:scss
+@import "patternfly-sass/assets/stylesheets/_patternfly.scss";
 // endbower
 
 .browsehappy {
