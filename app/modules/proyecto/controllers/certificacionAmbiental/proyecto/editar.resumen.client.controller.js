@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('proyecto').controller('Proyecto.CertificacionAmbiental.Proyecto.Editar.ResumenController',
-    function ($scope, $state, $modal, proyecto) {
+    function ($scope, $state, proyecto) {
 
         $scope.view = {
             proyecto: proyecto

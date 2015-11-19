@@ -1,7 +1,7 @@
 <form name="form" class="form-horizontal" sg-read-only="!accessProyecto()" novalidate>
 
   <fieldset class="border-top" data-ng-if="view.load.historialActivo.procedimiento.sugerencias">
-    <legend><span class="text ng-scope">Procedimientos sugeridos <i class="fa fa-question-circle text-muted ng-scope" tooltip="Aca se listan los procedimientos sugeridos segun el estado actual del proceso." tooltip-placement="right"></i></span></legend>
+    <legend><span class="text ng-scope">Procedimientos sugeridos <i class="fa fa-question-circle text-muted ng-scope" uib-tooltip="Aca se listan los procedimientos sugeridos segun el estado actual del proceso." uib-tooltip-placement="right"></i></span></legend>
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Sugeridos:</label>
@@ -16,7 +16,7 @@
   </fieldset>
 
   <fieldset class="border-top">
-    <legend><span class="text ng-scope">Nueva etapa del procedimiento <i class="fa fa-question-circle text-muted ng-scope" tooltip="Este formulario representa el nuevo estado de la solicitud de certificacion ambiental. Use esta ventana para avanzar los pasos." tooltip-placement="right"></i></span></legend>
+    <legend><span class="text ng-scope">Nueva etapa del procedimiento <i class="fa fa-question-circle text-muted ng-scope" uib-tooltip="Este formulario representa el nuevo estado de la solicitud de certificacion ambiental. Use esta ventana para avanzar los pasos." uib-tooltip-placement="right"></i></span></legend>
     <div class="form-group" data-ng-class="{ 'has-error' : form.etapa.$invalid && form.$submitted }">
       <label class="col-sm-2 control-label"><span class="required">*</span> Etapa:</label>
       <div class="col-sm-4">
@@ -61,9 +61,9 @@
       </div>
       <div class="col-sm-4">
         <div class="btn-group">
-          <label class="btn btn-default" ng-model="combo.selected.categoria" btn-radio="combo.categoria[0]">CAT.  I</label>
-          <label class="btn btn-default" ng-model="combo.selected.categoria" btn-radio="combo.categoria[1]">CAT. II</label>
-          <label class="btn btn-default" ng-model="combo.selected.categoria" btn-radio="combo.categoria[2]">CAT.III</label>
+          <label class="btn btn-default" ng-model="combo.selected.categoria" uib-btn-radio="combo.categoria[0]">CAT.  I</label>
+          <label class="btn btn-default" ng-model="combo.selected.categoria" uib-btn-radio="combo.categoria[1]">CAT. II</label>
+          <label class="btn btn-default" ng-model="combo.selected.categoria" uib-btn-radio="combo.categoria[2]">CAT.III</label>
         </div>
       </div>
     </div>
