@@ -1,0 +1,28 @@
+<div class="row">
+    <div ui-view class="col-sm-9 col-md-10 col-sm-push-3 col-md-push-2" style="min-height: 581px;">
+
+    </div>
+    <!-- /col -->
+
+    <div class="col-sm-3 col-md-2 col-sm-pull-9 col-md-pull-10 sidebar-pf sidebar-pf-left" style="min-height: 581px;">
+        <div class="panel-group" data-ng-controller="PersonaSidebarController">
+            <div class="panel panel-default" data-ng-repeat="item in menuItems">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a>{{item.title}}</a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li data-ng-repeat="subItem in item.menuItems" ui-sref-active="active">
+                                <a ui-sref="{{subItem.link}}">{{subItem.title}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /col -->
+</div>

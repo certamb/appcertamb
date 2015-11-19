@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-sm-7">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="border-top">
+                    <legend><span class="text">Datos principales</span></legend>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <dl class="dl-horizontal left">
+                                <dt>Codigo pais:</dt>
+                                <dd data-ng-bind="view.persona.codigoPais"></dd>
+                                <dt>Documento:</dt>
+                                <dd data-ng-bind="view.persona.tipoDocumento"></dd>
+                                <dt>Numero:</dt>
+                                <dd data-ng-bind="view.persona.numeroDocumento"></dd>
+                            </dl>
+                            <dl class="dl-horizontal left">
+                                <dt>Apellido paterno:</dt>
+                                <dd data-ng-bind="view.persona.apellidoPaterno"></dd>
+                                <dt>Apellido materno:</dt>
+                                <dd data-ng-bind="view.persona.apellidoMaterno"></dd>
+                                <dt>Nombres:</dt>
+                                <dd data-ng-bind="view.persona.nombres"></dd>
+                            </dl>
+                            <dl class="dl-horizontal left">
+                                <dt>Fecha nacimiento:</dt>
+                                <dd data-ng-if="view.persona.fechaNacimiento"
+                                    data-ng-bind="view.persona.fechaNacimiento | date : 'dd/MM/yyyy'"></dd>
+                                <dd data-ng-if="!view.persona.fechaNacimiento"><em>No registrado</em></dd>
+                                <dt>Sexo:</dt>
+                                <dd data-ng-if="view.persona.sexo" data-ng-bind="view.persona.sexo"></dd>
+                                <dd data-ng-if="!view.persona.sexo"><em>No registrado</em></dd>
+                                <dt>Estado civil:</dt>
+                                <dd data-ng-if="view.persona.estadoCivil" data-ng-bind="view.persona.estadoCivil"></dd>
+                                <dd data-ng-if="!view.persona.estadoCivil"><em>No registrado</em></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-sm-5">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="border-top">
+                    <legend><span class="text">Datos adicionales</span></legend>
+                    <dl class="dl-horizontal left">
+                        <dt>Ocupacion:</dt>
+                        <dd data-ng-if="view.persona.ocupacion" data-ng-bind="view.persona.ocupacion"></dd>
+                        <dd data-ng-if="!view.persona.ocupacion"><em>No registrado</em></dd>
+                    </dl>
+                    <h3>Direccion</h3>
+                    <dl class="dl-horizontal left">
+                        <dt>Direccion:</dt>
+                        <dd data-ng-if="view.persona.direccion" data-ng-bind="view.persona.direccion"></dd>
+                        <dd data-ng-if="!view.persona.direccion"><em>No registrado</em></dd>
+                        <dt>Referencia:</dt>
+                        <dd data-ng-if="view.persona.referencia" data-ng-bind="view.persona.referencia"></dd>
+                        <dd data-ng-if="!view.persona.referencia"><em>No registrado</em></dd>
+                        <dt>Ubigeo:</dt>
+                        <dd data-ng-if="view.persona.ubigeo" data-ng-bind="view.persona.ubigeo"></dd>
+                        <dd data-ng-if="!view.persona.ubigeo"><em>No registrado</em></dd>
+                    </dl>
+                    <h3>Contacto</h3>
+                    <dl class="dl-horizontal left">
+                        <dt>Telefono:</dt>
+                        <dd data-ng-if="view.persona.telefono" data-ng-bind="view.persona.telefono"></dd>
+                        <dd data-ng-if="!view.persona.telefono"><em>No registrado</em></dd>
+                        <dt>Celular:</dt>
+                        <dd data-ng-if="view.persona.celular" data-ng-bind="view.persona.celular"></dd>
+                        <dd data-ng-if="!view.persona.celular"><em>No registrado</em></dd>
+                        <dt>Email:</dt>
+                        <dd data-ng-if="view.persona.email" data-ng-bind="view.persona.email"></dd>
+                        <dd data-ng-if="!view.persona.email"><em>No registrado</em></dd>
+                    </dl>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

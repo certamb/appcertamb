@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-sm-7">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="border-top">
+                    <legend><span class="text">Proyecto</span></legend>
+                    <dl class="dl-horizontal left">
+                      <dt>Denominacion:</dt>
+                      <dd data-ng-bind="view.proyecto.denominacion"></dd>
+                      <dt>Tipo:</dt>
+                      <dd data-ng-bind="view.proyecto.tipo"></dd>
+                      <dt>estado:</dt>
+                      <dd data-ng-bind="view.proyecto.estado"></dd>
+                      <dt data-ng-if="view.proyecto.fechaVigenciaDesde">Vigencia:</dt>
+                      <dd data-ng-if="view.proyecto.fechaVigenciaDesde" data-ng-bind-template="{{view.proyecto.fechaVigenciaDesde | date: 'dd/MM/yyyy'}}&nbsp;a&nbsp;{{view.proyecto.fechaVigenciaHasta| date: 'dd/MM/yyyy'}} "></dd>
+                    </dl>
+                </fieldset>
+                <fieldset class="border-top">
+                  <legend><span class="text">Direccion regional</span></legend>
+                  <dl class="dl-horizontal left">
+                    <dt>Denominacion:</dt>
+                    <dd data-ng-bind="view.proyecto.direccionRegional.denominacion"></dd>
+                  </dl>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="border-top">
+                    <legend><span class="text">Estado actual</span></legend>
+                    <dl class="dl-horizontal left">
+                        <dt>Estado procedimiento:</dt>
+                        <dd data-ng-bind="view.load.historialActivo.procedimiento.denominacion"></dd>
+                        <dt>Plazo:</dt>
+                        <dd data-ng-bind="view.load.historialActivo.procedimiento.plazo"></dd>
+
+                        <dt>Fecha registro:</dt>
+                        <dd data-ng-bind="view.load.historialActivo.fecha | date: 'dd/MM/yyyy'"></dd>
+
+                        <dt data-ng-if="view.load.historialActivo.categoria">Categoria:</dt>
+                        <dd data-ng-if="view.load.historialActivo.categoria" data-ng-bind="view.load.historialActivo.categoria"></dd>
+
+                        <dt data-ng-if="view.load.historialActivo.resolucion">Resolucion:</dt>
+                        <dd data-ng-if="view.load.historialActivo.resolucion" data-ng-bind="view.load.historialActivo.resolucion"></dd>
+
+                        <dt>Observacion:</dt>
+                        <dd data-ng-if="view.load.historialActivo.observacion" data-ng-bind="view.load.historialActivo.observacion"></dd>
+                        <dd data-ng-if="!view.load.historialActivo.observacion"><em>No registrado</em></dd>
+                    </dl>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

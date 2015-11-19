@@ -1,0 +1,22 @@
+<h1><strong>Personas naturales</strong></h1>
+
+<form name="form" data-ng-submit="search()" novalidate>
+	<div class="sg-grid-top-panel">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<div class="input-group">
+						<input type="text" name="filterText" class="form-control" data-ng-model="filterOptions.filterText" placeholder="Filter text" pf-focused="true" autofocus>
+						<span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search text"></i></button></span>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group pull-right">
+					<a href="" ui-sref="^.crear" class="btn btn-primary">Nuevo</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<div ui-grid="gridOptions" external-scopes="gridActions" ui-grid-selection ui-grid-pagination class="grid"></div>

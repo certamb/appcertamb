@@ -23,15 +23,11 @@
         <a ng-switch-default data-ui-sref="{{item.state}}" data-ng-bind="item.title"></a>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-utility">
+    <ul class="nav navbar-nav navbar-utility" data-ng-controller="KeycloakController">
       <li>
         <a href="">
           <strong>Rol: </strong>
           <span ng-bind="user.roles.toString()"></span>
-
-          <span ng-if="session.caja">(</span>
-          <span ng-if="session.caja" ng-bind="session.caja.denominacion"></span>
-          <span ng-if="session.caja">)</span>
         </a>
       </li>
       <li>
@@ -79,7 +75,6 @@
           </li>
         </ul>
       </li>
-
 
     </ul>
   </div>

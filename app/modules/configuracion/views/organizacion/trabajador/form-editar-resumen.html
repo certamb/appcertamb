@@ -1,0 +1,78 @@
+<div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <fieldset class="border-top">
+            <legend><span class="text">Datos principales</span></legend>
+            <dl class="dl-horizontal left">
+              <dt>Codigo pais:</dt>
+              <dd data-ng-bind="view.loaded.persona.codigoPais"></dd>
+              <dt>Documento:</dt>
+              <dd data-ng-bind="view.loaded.persona.tipoDocumento"></dd>
+              <dt>Numero:</dt>
+              <dd data-ng-bind="view.loaded.persona.numeroDocumento"></dd>
+            </dl>
+            <dl class="dl-horizontal left">
+              <dt>Apellido paterno:</dt>
+              <dd data-ng-bind="view.loaded.persona.apellidoPaterno"></dd>
+              <dt>Apellido materno:</dt>
+              <dd data-ng-bind="view.loaded.persona.apellidoMaterno"></dd>
+              <dt>Nombres:</dt>
+              <dd data-ng-bind="view.loaded.persona.nombres"></dd>
+            </dl>
+            <dl class="dl-horizontal left">
+              <dt>Fecha nacimiento:</dt>
+              <dd data-ng-if="view.loaded.persona.fechaNacimiento"
+                  data-ng-bind="view.loaded.persona.fechaNacimiento | date : 'dd/MM/yyyy'"></dd>
+              <dd data-ng-if="!view.loaded.persona.fechaNacimiento"><em>No registrado</em></dd>
+              <dt>Sexo:</dt>
+              <dd data-ng-if="view.loaded.persona.sexo" data-ng-bind="view.loaded.persona.sexo"></dd>
+              <dd data-ng-if="!view.loaded.persona.sexo"><em>No registrado</em></dd>
+              <dt>Estado civil:</dt>
+              <dd data-ng-if="view.loaded.persona.estadoCivil" data-ng-bind="view.loaded.persona.estadoCivil"></dd>
+              <dd data-ng-if="!view.loaded.persona.estadoCivil"><em>No registrado</em></dd>
+            </dl>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <fieldset class="border-top">
+                <legend><span class="text">Datos adicionales</span></legend>
+                <dl class="dl-horizontal left">
+                  <dt>Direccion regional:</dt>
+                  <dd data-ng-if="view.trabajador.direccionRegional.denominacion" data-ng-bind="view.trabajador.direccionRegional.denominacion"></dd>
+                  <dd data-ng-if="!view.trabajador.direccionRegional.denominacion"><em>No registrado</em></dd>
+                </dl>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <fieldset class="border-top">
+                <legend><span class="text">Acceso al sistema</span></legend>
+                <dl class="dl-horizontal left">
+                  <dt>Usuario:</dt>
+                  <dd data-ng-if="view.trabajador.usuario" data-ng-bind="view.trabajador.usuario"></dd>
+                  <dd data-ng-if="!view.trabajador.usuario"><em>No registrado</em></dd>
+                  <dt>Roles:</dt>
+                  <dd data-ng-if="view.loaded.userKeycloak.rolesAssigned.length" data-ng-bind="view.loaded.userKeycloak.rolesAssigned.toString()"></dd>
+                  <dd data-ng-if="!view.loaded.userKeycloak.rolesAssigned.length"><em>No registrado</em></dd>
+                </dl>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

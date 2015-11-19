@@ -445,6 +445,11 @@ module.exports = function (grunt) {
           cwd: 'bower_components/patternfly/components/font-awesome',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: 'bower_components/angular-ui-grid',
+          src: ['*.ttf', '*.woff'],
+          dest: '<%= yeoman.dist %>/styles'
         }]
       },
       styles: {

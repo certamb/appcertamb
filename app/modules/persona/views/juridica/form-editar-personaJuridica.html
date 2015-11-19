@@ -1,0 +1,53 @@
+<div ncy-breadcrumb></div>
+
+<h1>
+    <strong>Editar persona juridica</strong>
+
+    <div class="pull-right">
+        <div class="btn-group">
+            <form name="form" data-ng-submit="remove()" novalidate>
+                <button sg-delete>
+                    <i class="pficon pficon-delete"></i>
+                    <span>Eliminar</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</h1>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div>
+
+            <div class="tab-container">
+                <ul class="nav nav-tabs">
+                    <li ui-sref-active="active">
+                        <a href ui-sref=".resumen">
+                            Resumen
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a href ui-sref=".datosPrincipales">
+                            Datos principales
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a href ui-sref=".datosAdicionales">
+                            Datos adicionales
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a href ui-sref=".representante">
+                            Representante legal
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-pane">
+                    <br/>
+                    <div ui-view></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

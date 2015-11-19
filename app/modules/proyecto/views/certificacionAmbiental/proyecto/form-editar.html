@@ -1,0 +1,86 @@
+<div ncy-breadcrumb></div>
+
+<h1>
+  <strong>Editar proyecto</strong>
+</h1>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div>
+
+      <div class="tab-container">
+        <ul class="nav nav-tabs">
+          <li ui-sref-active="active">
+            <a href ui-sref=".resumen">
+              Resumen
+            </a>
+          </li>
+          <li ui-sref-active="active" data-ng-if="accessProyecto()">
+            <a href ui-sref=".datosPrincipales">
+              Datos principales
+            </a>
+          </li>
+          <li ui-sref-active="active" data-ng-if="accessProyecto()">
+            <a href ui-sref=".procedimiento">
+              Administrar procedimiento
+            </a>
+          </li>
+        </ul>
+        <div class="tab-pane">
+          <br/>
+          <div ui-view></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-md-9">
+      <div class="page-header page-header-bleed-right">
+        <div class="actions pull-right">
+          <a href="#" data-ng-click="loadHistorial()"><span class="pficon pficon-refresh"></span> Actualizar</a>
+        </div>
+        <h1>Flujograma</h1>
+      </div>
+      <div>
+        <go-diagram go-model="model" style="border: solid 1px #dddddd; width:100%; height:400px"></go-diagram>
+        </br>
+      </div>
+    </div><!-- /col -->
+    <div class="col-sm-4 col-md-3 sidebar-pf sidebar-pf-right">
+      <div class="sidebar-header sidebar-header-bleed-left sidebar-header-bleed-right">
+        <h2 class="h5">Descripcion</h2>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <dl class="dl-horizontal left" data-ng-if="model.selectedNodeData">
+            <dt style="width: 130px;">Estado:</dt>
+            <dd style="margin-left: 130px;" data-ng-bind="model.selectedNodeData.item.procedimiento.denominacion"></dd>
+            <dt style="width: 130px;">Plazo:</dt>
+            <dd style="margin-left: 130px;" data-ng-bind="model.selectedNodeData.item.procedimiento.plazo"></dd>
+
+            <dt style="width: 130px;">Fecha registro:</dt>
+            <dd style="margin-left: 130px;" data-ng-bind="model.selectedNodeData.item.fecha | date: 'dd/MM/yyyy'"></dd>
+
+            <dt style="width: 130px;" data-ng-if="model.selectedNodeData.item.categoria">Categoria:</dt>
+            <dd style="margin-left: 130px;" data-ng-if="model.selectedNodeData.item.categoria" data-ng-bind="model.selectedNodeData.item.categoria"></dd>
+
+            <dt style="width: 130px;" data-ng-if="model.selectedNodeData.item.resolucion">Resolucion:</dt>
+            <dd style="margin-left: 130px;" data-ng-if="model.selectedNodeData.item.resolucion" data-ng-bind="model.selectedNodeData.item.resolucion"></dd>
+
+            <dt style="width: 130px;" >Observacion:</dt>
+            <dd style="margin-left: 130px;" data-ng-if="model.selectedNodeData.item.observacion" data-ng-bind="model.selectedNodeData.item.observacion"></dd>
+            <dd style="margin-left: 130px;" data-ng-if="!model.selectedNodeData.item.observacion"><em>No registrado</em></dd>
+          </dl>
+        </li>
+      </ul>
+    </div><!-- /col -->
+  </div>
+</div>
+
+
+
+

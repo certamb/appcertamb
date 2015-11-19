@@ -1,0 +1,134 @@
+<div ncy-breadcrumb></div>
+
+<h1><strong>Crear persona natural</strong></h1>
+
+<form name="form" sg-read-only="!access.administrarPersonas" class="form-horizontal" novalidate>
+
+	<div class="form-group" data-ng-class="{ 'has-error' : form.pais.$invalid && (form.pais.$touched || form.$submitted)}">
+		<label class="col-sm-2 control-label">Nacionalidad:</label>
+		<div class="col-sm-3">
+			<div class="input-group">
+				<span data-ng-bind="combo.selected.pais ? combo.selected.pais.alpha3Code : 'NA'" class="input-group-addon"></span>
+				<ui-select name="pais" data-ng-model="combo.selected.pais" ng-disabled="!access.administrarPersonas" pf-focused="true" autofocus required>
+					<ui-select-autoload pk-name="alpha3Code" comparator="view.persona.codigoPais" ignore-case="true"></ui-select-autoload>
+					<ui-select-match placeholder="Seleccione">{{$select.selected.fullNameEn}}</ui-select-match>
+					<ui-select-choices repeat="item in combo.pais | filter: $select.search">
+						<div data-ng-bind-html="item.fullNameEn | highlight: $select.search"></div>
+						<small data-ng-bind-html="item.alpha3Code | highlight: $select.search"></small>
+					</ui-select-choices>
+				</ui-select>
+			</div>
+			<div data-ng-messages="form.pais.$error" data-ng-if="form.pais.$touched || form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese nacionalidad.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" data-ng-class="{ 'has-error' : (form.tipoDocumento.$invalid || form.numeroDocumento.$invalid ) && (form.tipoDocumento.$dirty || form.numeroDocumento.$dirty || form.$submitted) }">
+		<label class="col-sm-2 control-label">Documento identidad:</label>
+		<div class="col-sm-2">
+			<ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento" ng-disabled="!access.administrarPersonas" required>
+				<ui-select-autoload pk-name="abreviatura" comparator="view.persona.tipoDocumento" ignore-case="true"></ui-select-autoload>
+				<ui-select-match placeholder="Documento">{{$select.selected.abreviatura}}</ui-select-match>
+				<ui-select-choices repeat="item in combo.tipoDocumento | filter: $select.search">
+					<div data-ng-bind-html="item.abreviatura | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+			<div data-ng-messages="form.tipoDocumento.$error" data-ng-if="form.tipoDocumento.$dirty || form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese documento.</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="input-group">
+				<input type="text" name="numeroDocumento" data-ng-model="view.persona.numeroDocumento" ui-keypress="{13:'check($event)'}" data-ng-pattern="/^[0-9]+$/" data-ng-minlength="combo.selected.tipoDocumento.cantidadCaracteres" data-ng-maxlength="combo.selected.tipoDocumento.cantidadCaracteres" class="form-control" required/>
+				<span class="input-group-btn"><button type="button" data-ng-click="check()" uib-tooltip="Check" tooltip-trigger="mouseenter" uib-tooltip-placement="bottom" class="btn btn-default"><span class="pficon pficon-cluster"></span></button></span>
+			</div>
+			<div data-ng-messages="form.numeroDocumento.$error" data-ng-if="form.numeroDocumento.$dirty || form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese numero documento.</div>
+				<div class="has-error" data-ng-message="minlength">Debe tener <span data-ng-bind="combo.selected.tipoDocumento.cantidadCaracteres"></span> digitos.</div>
+				<div class="has-error" data-ng-message="maxlength">Debe tener <span data-ng-bind="combo.selected.tipoDocumento.cantidadCaracteres"></span> digitos.</div>
+				<div class="has-error" data-ng-message="pattern">Numero invalido.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" data-ng-class="{ 'has-error' : form.apellidoPaterno.$invalid && form.$submitted }">
+		<label class="col-sm-2 control-label">Apellido paterno:</label>
+		<div class="col-sm-3">
+			<input name="apellidoPaterno" type="text" data-ng-model="view.persona.apellidoPaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" capitalize required/>
+			<div data-ng-messages="form.apellidoPaterno.$error" data-ng-if="form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese apellido paterno.</div>
+				<div class="has-error" data-ng-message="minlength">Ingrese apellido paterno.</div>
+				<div class="has-error" data-ng-message="maxlength">Apellido muy extenso, maximo 60 caracteres.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" data-ng-class="{ 'has-error' : form.apellidoMaterno.$invalid && form.$submitted }">
+		<label class="col-sm-2 control-label">Apellido materno:</label>
+		<div class="col-sm-3">
+			<input name="apellidoMaterno" type="text" data-ng-model="view.persona.apellidoMaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" capitalize required/>
+			<div data-ng-messages="form.apellidoMaterno.$error" data-ng-if="form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese apellido materno.</div>
+				<div class="has-error" data-ng-message="minlength">Ingrese apellido materno.</div>
+				<div class="has-error" data-ng-message="maxlength">Apellido muy extenso, maximo 60 caracteres.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" data-ng-class="{ 'has-error' : form.nombres.$invalid && form.$submitted }">
+		<label class="col-sm-2 control-label">Nombres:</label>
+		<div class="col-sm-3">
+			<input name="nombres" type="text" data-ng-model="view.persona.nombres" data-ng-minlength="1" data-ng-maxlength="70" class="form-control" capitalize required  />
+			<div data-ng-messages="form.nombres.$error" data-ng-if="form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese nombres.</div>
+				<div class="has-error" data-ng-message="minlength">Ingrese nombres.</div>
+				<div class="has-error" data-ng-message="maxlength">Nombre muy extenso, maximo 70 caracteres.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" data-ng-class="{ 'has-error' : form.fechanacimiento.$invalid && form.$submitted }">
+		<label class="col-sm-2 control-label">Fecha nacimiento:</label>
+		<div class="col-sm-2" data-ng-controller="Persona.Util.DateController">
+			<div class="input-group">
+				<input type="text" name="fechanacimiento" class="form-control" sg-max-date="maxDate" data-ng-model="view.persona.fechaNacimiento" uib-datepicker-popup="dd/MM/yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" data-ng-required="true" close-text="Close" placeholder="dd/mm/yyyy" required>
+				<span class="input-group-btn"><button class="btn btn-default" type="button" data-ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button></span>
+			</div>
+			<div data-ng-messages="form.fechanacimiento.$error" data-ng-if="form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese fecha nacimiento.</div>
+				<div class="has-error" data-ng-message="sgmaxdate">Fecha no valida.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" data-ng-class="{ 'has-error' : form.sexo.$invalid && form.$submitted }">
+		<label class="col-sm-2 control-label">Sexo:</label>
+		<div class="col-sm-2">
+			<ui-select name="sexo" data-ng-model="combo.selected.sexo" ng-disabled="!access.administrarPersonas" required>
+				<ui-select-match placeholder="Seleccione">{{$select.selected}}</ui-select-match>
+				<ui-select-choices repeat="item in combo.sexo | filter: $select.search">
+					<div data-ng-bind-html="item | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+			<div data-ng-messages="form.sexo.$error" data-ng-if="form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese sexo.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Estado civil <span class="optional">(opcional)</span>:</label>
+		<div class="col-sm-2">
+			<ui-select name="estadoCivil" data-ng-model="combo.selected.estadoCivil" ng-disabled="!access.administrarPersonas">
+				<ui-select-match placeholder="Seleccione">{{$select.selected}}</ui-select-match>
+				<ui-select-choices repeat="item in combo.estadoCivil | filter: $select.search">
+					<div data-ng-bind-html="item | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button sg-save ng-disabled="working">
+				<span ng-show="working">Guardando...</span>
+				<span ng-hide="working">Guardar</span>
+			</button>
+			<button sg-cancel ng-disabled="working" ui-sref="^.buscar">Cancelar</button>
+		</div>
+	</div>
+</form>

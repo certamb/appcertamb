@@ -1,0 +1,46 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">
+		<span class="pficon pficon-close"></span>
+	</button>
+	<h4 class="modal-title">Selecciona una foto para la persona</h4>
+</div>
+<div class="modal-body">
+	<div class="row">
+
+		<div class="col-md-6 col-md-offset-3" style="margin-top: 30px; margin-bottom: 30px;">
+			<div ng-if="view.persona.urlFoto" style="text-align: center;">
+				<img ng-if="view.persona.urlFoto" ng-src="{{view.persona.urlFoto}}" alt="Foto" class="img-thumbnail"
+					 style="height: 200px;">
+			</div>
+			<div ng-if="!view.persona.urlFoto" style="text-align: center;">
+				<img ngf-src="files[0]" ngf-default-src="modules/persona/client/img/upload.png" ngf-accept="'image/*'" ngf-min-size="10" ngf-max-size="10000" style="height: 200px;">
+			</div>
+			</br>
+
+			<div ng-show="uploader.progress" class="progress-description">
+				<div class="spinner spinner-xs spinner-inline"></div>
+				<strong>Procesando:</strong> Repositorio de fotos
+			</div>
+			<div ng-show="uploader.progress" class="progress progress-label-top-right">
+				<div class="progress-bar" ng-style="{ 'width': uploader.progress + '%' }">
+					<span ng-show="uploader.progress">{{uploader.progress}}%</span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div style="text-align: center;">
+                <span ng-hide="uploader.progress" class="btn btn-default fileinput-button" style="height: 27px;">
+    				<div class="button" ngf-select ngf-change="upload($files)">Subir foto</div>
+                </span>
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" data-ng-click="ok()">Cerrar</button>
+	<button class="btn btn-default" data-ng-click="cancel()">Cancelar</button>
+</div>

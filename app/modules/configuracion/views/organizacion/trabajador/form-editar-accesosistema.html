@@ -1,0 +1,47 @@
+<form name="form" sg-read-only="!access.administrarTrabajadores" class="form-horizontal" novalidate>
+
+  <fieldset class="border-top">
+    <legend><span class="text ng-scope">Asignar usuario <i class="fa fa-question-circle text-muted ng-scope"
+                                                           uib-tooltip="Usuario asignado en el sistema actualmente."
+                                                           uib-tooltip-placement="right"></i></span></legend>
+
+    <div class="form-group" ng-class="{ 'has-error' : form.usuario.$invalid && form.usuario.$dirty}">
+      <label class="col-sm-2 control-label"><span class="required">*</span> Usuario:</label>
+      <div class="col-sm-3">
+        <div class="input-group">
+          <input type="text" name="usuario" ng-model="view.usuario" ng-minlength="1" ng-maxlength="60" class="form-control" pf-focused="true" autofocus required/>
+					<span data-ng-show="view.trabajador.usuario" class="input-group-btn">
+						<button type="button" data-ng-click="desvincular()" class="btn btn-default"
+                    uib-tooltip="Desvincular el usuario."
+                    uib-tooltip-placement="right">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+					</span>
+        </div>
+        <div ng-messages="form.usuario.$error" ng-if="form.usuario.$dirty">
+          <div class="has-error" ng-message="required">Ingrese denominacion.</div>
+          <div class="has-error" ng-message="maxlength">Minimo 1 caracter.</div>
+          <div class="has-error" ng-message="maxlength">Maximo 60 caracteres.</div>
+          <div class="has-error" ng-message="disponible">Usuario no disponible.</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <a href="" data-ng-click="crearUsuarioKeycloak()" class="btn btn-link"
+           uib-tooltip="Crear un nuevo usuario."
+           uib-tooltip-placement="right">Crear usuario</a>
+      </div>
+    </div>
+
+  </fieldset>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button sg-save ng-disabled="working">
+        <span ng-show="working">Guardando...</span>
+        <span ng-hide="working">Guardar</span>
+      </button>
+      <button sg-cancel ng-disabled="working" ui-sref="^.resumen">Cancelar</button>
+    </div>
+  </div>
+
+</form>

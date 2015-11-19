@@ -1,0 +1,123 @@
+<div class="form-group" data-ng-class="{ 'has-error' : form.pais.$invalid && (form.pais.$touched || form.$submitted)}">
+	<label class="col-sm-3 control-label">Nacionalidad:</label>
+	<div class="col-sm-3">
+		<div class="input-group">
+			<span data-ng-bind="combo.selected.pais ? combo.selected.pais.alpha3Code : 'NA'" class="input-group-addon"></span>
+			<ui-select name="pais" data-ng-model="combo.selected.pais" ng-disabled="!access.administrarPersonas" pf-focused="true" autofocus required>
+				<ui-select-autoload pk-name="alpha3Code" comparator="view.persona.codigoPais" ignore-case="true"></ui-select-autoload>
+				<ui-select-match placeholder="Seleccione">{{$select.selected.fullNameEn}}</ui-select-match>
+				<ui-select-choices repeat="item in combo.pais | filter: $select.search">
+					<div data-ng-bind-html="item.fullNameEn | highlight: $select.search"></div>
+					<small data-ng-bind-html="item.alpha3Code | highlight: $select.search"></small>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+		<div data-ng-messages="form.pais.$error" data-ng-if="form.pais.$touched || form.$submitted">
+			<div class="has-error" data-ng-message="required">Ingrese nacionalidad.</div>
+		</div>
+	</div>
+</div>
+<div class="form-group" data-ng-class="{ 'has-error' : (form.tipoDocumento.$invalid || form.numeroDocumento.$invalid ) && (form.tipoDocumento.$dirty || form.numeroDocumento.$dirty || form.$submitted) }">
+	<label class="col-sm-3 control-label">Documento identidad:</label>
+	<div class="col-sm-2">
+		<ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento" ng-disabled="!access.administrarPersonas" required>
+			<ui-select-autoload pk-name="abreviatura" comparator="view.persona.tipoDocumento" ignore-case="true"></ui-select-autoload>
+			<ui-select-match placeholder="Documento">{{$select.selected.abreviatura}}</ui-select-match>
+			<ui-select-choices repeat="item in combo.tipoDocumento | filter: $select.search">
+				<div data-ng-bind-html="item.abreviatura | highlight: $select.search"></div>
+			</ui-select-choices>
+		</ui-select>
+		<div data-ng-messages="form.tipoDocumento.$error" data-ng-if="form.$submitted">
+			<div class="has-error" data-ng-message="required">Ingrese documento.</div>
+		</div>
+	</div>
+	<div class="col-sm-2">
+		<div class="input-group">
+			<input type="text" name="numeroDocumento" data-ng-model="view.persona.numeroDocumento" ui-keypress="{13:'check($event)'}" data-ng-pattern="/^[0-9]+$/" data-ng-minlength="combo.selected.tipoDocumento.cantidadCaracteres" data-ng-maxlength="combo.selected.tipoDocumento.cantidadCaracteres" class="form-control" required/>
+			<span class="input-group-btn"><button type="button" data-ng-click="check()" tooltip="Check" tooltip-trigger="mouseenter" tooltip-placement="bottom" class="btn btn-default"><span class="pficon pficon-cluster"></span></button></span>
+		</div>
+		<div data-ng-messages="form.numeroDocumento.$error" data-ng-if="form.numeroDocumento.$dirty || form.$submitted">
+			<div class="has-error" data-ng-message="required">Ingrese numero documento.</div>
+			<div class="has-error" data-ng-message="minlength">Debe tener <span data-ng-bind="combo.selected.tipoDocumento.cantidadCaracteres"></span> digitos.</div>
+			<div class="has-error" data-ng-message="maxlength">Debe tener <span data-ng-bind="combo.selected.tipoDocumento.cantidadCaracteres"></span> digitos.</div>
+			<div class="has-error" data-ng-message="pattern">Numero invalido.</div>
+		</div>
+	</div>
+</div>
+<div class="form-group" data-ng-class="{ 'has-error' : form.razonSocial.$invalid && form.$submitted }">
+	<label class="col-sm-3 control-label">Razon social:</label>
+	<div class="col-sm-3">
+		<input name="razonSocial" type="text" data-ng-model="view.persona.razonSocial" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" capitalize required/>
+		<div data-ng-messages="form.razonSocial.$error" data-ng-if="form.$submitted">
+			<div class="has-error" data-ng-message="required">Ingrese razon social.</div>
+			<div class="has-error" data-ng-message="minlength">Ingrese razon social.</div>
+			<div class="has-error" data-ng-message="maxlength">Maximo 60 caracteres.</div>
+		</div>
+	</div>
+</div>
+<div class="form-group" data-ng-class="{ 'has-error' : form.nombreComercial.$invalid && form.$submitted }">
+	<label class="col-sm-3 control-label">Nombre comercial <span class="optional">(opcional)</span>:</label>
+	<div class="col-sm-3">
+		<input name="nombreComercial" type="text" data-ng-model="view.persona.nombreComercial" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" capitalize/>
+		<div data-ng-messages="form.nombreComercial.$error" data-ng-if="form.$submitted">
+			<div class="has-error" data-ng-message="required">Ingrese nombre comercial.</div>
+			<div class="has-error" data-ng-message="minlength">Ingrese nombre comercial.</div>
+			<div class="has-error" data-ng-message="maxlength">Maximo 60 caracteres.</div>
+		</div>
+	</div>
+</div>
+<div class="form-group" data-ng-class="{ 'has-error' : form.actividadPrincipal.$invalid && form.$submitted }">
+	<label class="col-sm-3 control-label">Actividad principal <span class="optional">(opcional)</span>:</label>
+	<div class="col-sm-3">
+		<input name="actividadPrincipal" type="text" data-ng-model="view.persona.actividadPrincipal" data-ng-minlength="1" data-ng-maxlength="70" class="form-control" capitalize />
+		<div data-ng-messages="form.nombres.$error" data-ng-if="form.$submitted">
+			<div class="has-error" data-ng-message="required">Ingrese actividad principal.</div>
+			<div class="has-error" data-ng-message="minlength">Ingrese actividad principal.</div>
+			<div class="has-error" data-ng-message="maxlength">Maximo 70 caracteres.</div>
+		</div>
+	</div>
+</div>
+<div class="form-group" data-ng-class="{ 'has-error' : form.fechaConstitucion.$invalid && form.$submitted }">
+	<label class="col-sm-3 control-label">Fecha constitucion:</label>
+	<div class="col-sm-2" data-ng-controller="Persona.Util.DateController">
+		<div class="input-group">
+			<input type="text" name="fechaConstitucion" class="form-control" sg-max-date="maxDate" data-ng-model="view.persona.fechaConstitucion" datepicker-popup="dd/MM/yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" data-ng-required="true" close-text="Close" placeholder="dd/mm/yyyy" required>
+			<span class="input-group-btn"><button class="btn btn-default" type="button" data-ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button></span>
+		</div>
+		<div data-ng-messages="form.fechaConstitucion.$error" data-ng-if="form.$submitted">
+			<div class="has-error" data-ng-message="required">Ingrese fecha constitucion.</div>
+			<div class="has-error" data-ng-message="sgmaxdate">Fecha no valida.</div>
+		</div>
+	</div>
+</div>
+<div class="form-group" data-ng-class="{ 'has-error' : form.tipoEmpresa.$invalid && form.$submitted }">
+	<label class="col-sm-3 control-label">Tipo empresa:</label>
+	<div class="col-sm-2">
+		<ui-select name="tipoEmpresa" data-ng-model="combo.selected.tipoEmpresa" required>
+			<ui-select-match placeholder="Seleccione">{{$select.selected}}</ui-select-match>
+			<ui-select-choices repeat="item in combo.tipoEmpresa | filter: $select.search">
+				<div data-ng-bind-html="item | highlight: $select.search"></div>
+			</ui-select-choices>
+		</ui-select>
+		<div data-ng-messages="form.tipoEmpresa.$error" data-ng-if="form.$submitted">
+			<div class="has-error" data-ng-message="required">Ingrese tipo empresa.</div>
+		</div>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-3 control-label">Fin de lucro <span class="optional">(opcional)</span>:</label>
+	<div class="col-sm-2">
+		<div class="checkbox" style="margin-top:5px;">
+			<label>
+				<input type="checkbox" name="finLucro" data-ng-model="view.persona.finLucro" data-ng-init="view.persona.finLucro"> Seleccione si tiene fin de lucro
+			</label>
+		</div>
+	</div>
+</div>
+
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<button sg-cancel ui-sref="^.^.buscar">Cancelar</button>
+		<button type="button" class="btn btn-default" data-ng-click="goTabRepresentante()">Siguiente »</button>
+	</div>
+</div>

@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="border-top">
+                    <legend><span class="text">Datos principales</span></legend>
+                    <dl class="dl-horizontal left">
+                        <dt>Codigo pais:</dt>
+                        <dd data-ng-bind="view.persona.codigoPais"></dd>
+                        <dt>Documento:</dt>
+                        <dd data-ng-bind="view.persona.tipoDocumento"></dd>
+                        <dt>Numero:</dt>
+                        <dd data-ng-bind="view.persona.numeroDocumento"></dd>
+                    </dl>
+                    <dl class="dl-horizontal left">
+                        <dt>Razon social:</dt>
+                        <dd data-ng-bind="view.persona.razonSocial"></dd>
+                        <dt>Nombre comercial:</dt>
+                        <dd data-ng-if="view.persona.nombreComercial" data-ng-bind="view.persona.nombreComercial"></dd>
+                        <dd data-ng-if="!view.persona.nombreComercial"><em>No registrado</em></dd>
+                        <dt>Actividad principal:</dt>
+                        <dd data-ng-if="view.persona.actividadPrincipal" data-ng-bind="view.persona.actividadPrincipal"></dd>
+                        <dd data-ng-if="!view.persona.actividadPrincipal"><em>No registrado</em></dd>
+                    </dl>
+                    <dl class="dl-horizontal left">
+                        <dt>Fecha constitucion:</dt>
+                        <dd data-ng-if="view.persona.fechaConstitucion" data-ng-bind="view.persona.fechaConstitucion | date : 'dd/MM/yyyy'"></dd>
+                        <dd data-ng-if="!view.persona.fechaConstitucion"><em>No registrado</em></dd>
+                        <dt>Tipo empresa:</dt>
+                        <dd data-ng-if="view.persona.tipoEmpresa" data-ng-bind="view.persona.tipoEmpresa"></dd>
+                        <dd data-ng-if="!view.persona.tipoEmpresa"><em>No registrado</em></dd>
+                        <dt>Fin de lucro:</dt>
+                        <dd data-ng-if="view.persona.finLucro" data-ng-bind="view.persona.finLucro | si_no | uppercase"></dd>
+                        <dd data-ng-if="!view.persona.finLucro"><em>No registrado</em></dd>
+                    </dl>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="border-top">
+                    <legend><span class="text">Datos adicionales</span></legend>
+                    <h3 style="margin-top: 0;">Direccion</h3>
+                    <dl class="dl-horizontal left">
+                        <dt>Direccion:</dt>
+                        <dd data-ng-if="view.persona.direccion" data-ng-bind="view.persona.direccion"></dd>
+                        <dd data-ng-if="!view.persona.direccion"><em>No registrado</em></dd>
+                        <dt>Referencia:</dt>
+                        <dd data-ng-if="view.persona.referencia" data-ng-bind="view.persona.referencia"></dd>
+                        <dd data-ng-if="!view.persona.referencia"><em>No registrado</em></dd>
+                        <dt>Ubigeo:</dt>
+                        <dd data-ng-if="view.persona.ubigeo" data-ng-bind="view.persona.ubigeo"></dd>
+                        <dd data-ng-if="!view.persona.ubigeo"><em>No registrado</em></dd>
+                    </dl>
+                    <h3>Contacto</h3>
+                    <dl class="dl-horizontal left">
+                        <dt>Telefono:</dt>
+                        <dd data-ng-if="view.persona.telefono" data-ng-bind="view.persona.telefono"></dd>
+                        <dd data-ng-if="!view.persona.telefono"><em>No registrado</em></dd>
+                        <dt>Celular:</dt>
+                        <dd data-ng-if="view.persona.celular" data-ng-bind="view.persona.celular"></dd>
+                        <dd data-ng-if="!view.persona.celular"><em>No registrado</em></dd>
+                        <dt>Email:</dt>
+                        <dd data-ng-if="view.persona.email" data-ng-bind="view.persona.email"></dd>
+                        <dd data-ng-if="!view.persona.email"><em>No registrado</em></dd>
+                    </dl>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="border-top">
+                    <legend><span class="text">Representante legal</span></legend>
+                    <dl class="dl-horizontal left">
+                        <dt>Codigo pais:</dt>
+                        <dd data-ng-bind="view.persona.representanteLegal.codigoPais"></dd>
+                        <dt>Documento:</dt>
+                        <dd data-ng-bind="view.persona.representanteLegal.tipoDocumento"></dd>
+                        <dt>Numero:</dt>
+                        <dd data-ng-bind="view.persona.representanteLegal.numeroDocumento"></dd>
+                    </dl>
+                    <dl class="dl-horizontal left">
+                        <dt>Apellido paterno:</dt>
+                        <dd data-ng-bind="view.persona.representanteLegal.apellidoPaterno"></dd>
+                        <dt>Apellido materno:</dt>
+                        <dd data-ng-bind="view.persona.representanteLegal.apellidoMaterno"></dd>
+                        <dt>Nombres:</dt>
+                        <dd data-ng-bind="view.persona.representanteLegal.nombres"></dd>
+                    </dl>
+                    <dl class="dl-horizontal left">
+                        <dt>Fecha nacimiento:</dt>
+                        <dd data-ng-if="view.persona.representanteLegal.fechaNacimiento"
+                            data-ng-bind="view.persona.representanteLegal.fechaNacimiento | date : 'dd/MM/yyyy'"></dd>
+                        <dd data-ng-if="!view.persona.representanteLegal.fechaNacimiento"><em>No registrado</em></dd>
+                        <dt>Sexo:</dt>
+                        <dd data-ng-if="view.persona.representanteLegal.sexo" data-ng-bind="view.persona.representanteLegal.sexo"></dd>
+                        <dd data-ng-if="!view.persona.representanteLegal.sexo"><em>No registrado</em></dd>
+                    </dl>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="border-top">
+                    <legend><span class="text">Accionistas</span></legend>
+                    <table class="table table-striped table-bordered table-condensed">
+                        <em data-ng-show="!view.load.accionistas.length">No se encontraron accionistas.</em>
+                        <thead data-ng-show="view.loadObjects.accionistas.length">
+                        <tr>
+                            <th>#</th>
+                            <th>Documento</th>
+                            <th>Nombres</th>
+                            <th>%</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="item in view.loadObjects.accionistas">
+                            <td><span data-ng-bind="$index+1"></span></td>
+                            <td>
+                                <span data-ng-bind="item.personaNatural.tipoDocumento"></span><span>/</span><span data-ng-bind="item.numeroDocumento"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="item.personaNatural.apellidoPaterno"></span><span>&nbsp;</span><span data-ng-bind="item.personaNatural.apellidoMaterno"></span><span>,&nbsp;</span><span data-ng-bind="item.personaNatural.nombres"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="item.porcentajeParticipacion"></span>
+                            </td>
+                            <td style="text-align: center">
+                                <button type="button" data-ng-click="verPersona(item)" class="btn btn-info btn-xs">Ver</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

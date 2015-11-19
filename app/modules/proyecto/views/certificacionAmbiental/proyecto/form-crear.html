@@ -1,0 +1,69 @@
+<div ncy-breadcrumb></div>
+
+<h1><strong>Crear proyecto</strong></h1>
+
+<form name="form" sg-read-only="!(access.administrarProyectos || access.administrarProyectosDireccionRegional)" class="form-horizontal" novalidate>
+
+  <div class="form-group" data-ng-class="{ 'has-error' : form.direccionRegional.$invalid && form.$submitted }">
+    <label class="col-sm-2 control-label"><span class="required">*</span> Direccion regional:</label>
+    <div class="col-sm-4">
+      <ui-select name="direccionRegional" data-ng-model="combo.selected.direccionRegional" ng-disabled="!(access.administrarProyectos || access.administrarProyectosDireccionRegional)" pf-focused="true" autofocus required>
+        <ui-select-match placeholder="Direccion regional">{{$select.selected.denominacion}}</ui-select-match>
+        <ui-select-choices repeat="item in combo.direccionRegional | filter: $select.search">
+          <div data-ng-bind-html="item.denominacion | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+      <div data-ng-messages="form.direccionRegional.$error" data-ng-if="form.$submitted">
+        <div class="has-error" data-ng-message="required">Ingrese direccion regional.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" data-ng-class="{ 'has-error' : form.tipoProyecto.$invalid && form.$submitted }">
+    <label class="col-sm-2 control-label"><span class="required">*</span> Tipo proyecto:</label>
+    <div class="col-sm-2">
+      <ui-select name="tipoProyecto" data-ng-model="combo.selected.tipoProyecto" ng-disabled="!(access.administrarProyectos || access.administrarProyectosDireccionRegional)" required>
+        <ui-select-match placeholder="Tipo proyecto">{{$select.selected.denominacion}}</ui-select-match>
+        <ui-select-choices repeat="item in combo.tipoProyecto | filter: $select.search">
+          <div data-ng-bind-html="item.denominacion | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+      <div data-ng-messages="form.tipoProyecto.$error" data-ng-if="form.$submitted">
+        <div class="has-error" data-ng-message="required">Ingrese tipo proyecto.</div>
+      </div>
+    </div>
+  </div>
+	<div class="form-group" data-ng-class="{ 'has-error' : form.denominacion.$invalid && form.$submitted }">
+		<label class="col-sm-2 control-label"><span class="required">*</span> Denominacion:</label>
+		<div class="col-sm-4">
+			<input name="denominacion" type="text" data-ng-model="view.proyecto.denominacion" data-ng-minlength="1" data-ng-maxlength="200" class="form-control" capitalize required/>
+			<div data-ng-messages="form.denominacion.$error" data-ng-if="form.$submitted">
+				<div class="has-error" data-ng-message="required">Ingrese direccion regional.</div>
+				<div class="has-error" data-ng-message="minlength">Ingrese direccion regional.</div>
+				<div class="has-error" data-ng-message="maxlength">Maximo 200 caracteres.</div>
+			</div>
+		</div>
+	</div>
+  <div class="form-group" ng-class="{ 'has-error' : form.proyecto.$invalid && form.$submitted}">
+    <label class="col-sm-2 control-label"><span class="required">*</span> Monto:</label>
+    <div class="col-sm-2">
+      <input type="text" name="proyecto" ng-model="view.proyecto.monto" class="form-control"
+             ui-number-mask="2" min="0" max="100000000000"
+             ng-minlength="1" ng-maxlength="30"
+             placeholder="0.00" required/>
+      <div ng-messages="form.proyecto.$error" ng-if="form.$submitted">
+        <div class="has-error" ng-message="required">Ingrese monto.</div>
+        <div class="has-error" ng-message="maxlength">Maximo 30 caracteres.</div>
+        <div class="has-error" ng-message="max">Maximo 100,000,000,000.00.</div>
+      </div>
+    </div>
+  </div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button sg-save ng-disabled="working">
+				<span ng-show="working">Guardando...</span>
+				<span ng-hide="working">Guardar</span>
+			</button>
+			<button sg-cancel ng-disabled="working" ui-sref="^.buscar">Cancelar</button>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,65 @@
+<div ncy-breadcrumb></div>
+
+<h1><strong>Crear tipo documento</strong></h1>
+
+<form name="form" sg-read-only="!access.administrarDocumentos" class="form-horizontal" novalidate>
+
+    <div class="form-group" data-ng-class="{ 'has-error' : form.tipoPersona.$invalid && form.$submitted }">
+        <label class="col-sm-2 control-label"><span class="required">*</span> Tipo persona:</label>
+        <div class="col-sm-3">
+            <ui-select name="tipoPersona" data-ng-model="combo.selected.tipoPersona" ng-disabled="!access.administrarDocumentos" pf-focused="true" autofocus required>
+                <ui-select-match placeholder="Seleccione">{{$select.selected}}</ui-select-match>
+                <ui-select-choices repeat="item in combo.tipoPersona | filter: $select.search">
+                    <div data-ng-bind-html="item | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+            <div data-ng-messages="form.tipoPersona.$error" data-ng-if="form.$submitted">
+                <div class="has-error" data-ng-message="required">Ingrese tipo persona.</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" data-ng-class="{ 'has-error' : form.abreviatura.$invalid && form.abreviatura.$dirty }">
+        <label class="col-sm-2 control-label"><span class="required">*</span> Abreviatura:</label>
+        <div class="col-sm-3">
+            <input name="abreviatura" type="text" data-ng-model="view.tipoDocumento.abreviatura" sg-abreviatura-tipo-documento-validate data-ng-minlength="1" data-ng-maxlength="20" class="form-control" required/>
+            <div data-ng-messages="form.abreviatura.$error" data-ng-if="form.abreviatura.$dirty">
+                <div class="has-error" data-ng-message="required">Ingrese abreviatura.</div>
+                <div class="has-error" data-ng-message="minlength">Ingrese abreviatura.</div>
+                <div class="has-error" data-ng-message="maxlength">Abreviatura muy extensa, maximo 20 caracteres.</div>
+                <div class="has-error" data-ng-message="disponible">Abreviatura no disponible.</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" data-ng-class="{ 'has-error' : form.denominacion.$invalid && form.$submitted }">
+        <label class="col-sm-2 control-label"><span class="required">*</span> Denominacion:</label>
+        <div class="col-sm-3">
+            <input name="denominacion" type="text" data-ng-model="view.tipoDocumento.denominacion" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" required/>
+            <div data-ng-messages="form.denominacion.$error" data-ng-if="form.$submitted">
+                <div class="has-error" data-ng-message="required">Ingrese denominacion.</div>
+                <div class="has-error" data-ng-message="minlength">Ingrese denominacion.</div>
+                <div class="has-error" data-ng-message="maxlength">Denominacion muy extensa, maximo 60 caracteres.</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" data-ng-class="{ 'has-error' : form.cantidadCaracteres.$invalid && form.$submitted}">
+        <label class="col-sm-2 control-label"><span class="required">*</span> Cantidad caracteres:</label>
+        <div class="col-sm-3">
+            <input name="cantidadCaracteres" type="text" data-ng-model="view.tipoDocumento.cantidadCaracteres" ui-number-mask="0" min="1" max="20" ng-init="1" class="form-control" required />
+            <div data-ng-messages="form.cantidadCaracteres.$error" data-ng-if="form.$submitted">
+                <div class="has-error" data-ng-message="required">Ingrese cantidad caracteres.</div>
+                <div class="has-error" data-ng-message="min">Minimo 1.</div>
+                <div class="has-error" data-ng-message="max">Maximo 20.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button sg-save ng-disabled="working">
+                <span ng-show="working">Guardando...</span>
+                <span ng-hide="working">Guardar</span>
+            </button>
+            <button sg-cancel ng-disabled="working" ui-sref="^.buscar">Cancelar</button>
+        </div>
+    </div>
+</form>
