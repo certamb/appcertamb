@@ -187,8 +187,19 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           loggedin: function ($q, $timeout, $http, $location, Auth) {
             return checkUserRole(['administrar-trabajadores', 'administrar-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
-          trabajador: function ($state, $stateParams, SGTrabajador) {
-            return SGTrabajador.$find($stateParams.trabajador);
+          trabajador: function ($state, $stateParams, SGTrabajador, DIRECCION_REGIONAL) {
+            var deferred = $q.defer();
+            SGTrabajador.$find($stateParams.trabajador).then(
+              function(response){
+                if (DIRECCION_REGIONAL.id === response.id) {
+                  $timeout(deferred.resolve);
+                } else {
+                  $timeout(deferred.reject);
+                }
+              }, function error(err) {
+                $timeout(deferred.reject);
+              } 
+            );
           }
         },
         controller: 'Certamb.Organizacion.Trabajador.EditarController',
