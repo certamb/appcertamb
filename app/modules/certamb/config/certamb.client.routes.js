@@ -18,20 +18,30 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
     };
 
     var checkUserRole2 = function (role, $q, $timeout, $http, $location, Auth) {
+      var realm = 'certamb_app';
+      var result = false;
       var deferred = $q.defer();
+      
       if(angular.isArray(role)){
-
+        for(var i=0;i<role.length;i++){
+          if (Auth.authz.hasResourceRole(role[i], realm)) {
+            result = true;
+          }
+        }
       } else {
         if (Auth.authz.hasResourceRole(role, 'certamb_app')) {
-          $timeout(deferred.resolve);
+          result = true;
         }
-        else {
-          $timeout(deferred.reject);
-          alert('No tiene los permisos para poder acceder a esta pagina');
-          $location.path('/');
-        }
-        return deferred.promise;
       }
+      
+      if (result) {
+        $timeout(deferred.resolve);
+      } else {
+        $timeout(deferred.reject);
+        alert('No tiene los permisos para poder acceder a esta pagina');
+        $location.path('/');
+      }
+      return deferred.promise;
     };
 
     // $urlRouterProvider.when('/certamb/app', '/certamb/app/organizacion/direccionesRegionales');
