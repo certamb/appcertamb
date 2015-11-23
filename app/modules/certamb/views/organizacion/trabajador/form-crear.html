@@ -2,7 +2,7 @@
 
 <h1><strong>Crear trabajador</strong></h1>
 
-<form name="form" sg-read-only="!access.administrarTrabajadores" class="form-horizontal"
+<form name="form" sg-read-only="!(access.administrarTrabajadores || access.administrarTrabajadoresDireccionRegional)" class="form-horizontal"
       novalidate>
 
   <fieldset class="border-top">
@@ -14,7 +14,7 @@
 
       <div class="col-sm-4">
         <ui-select name="sucursal" ng-model="combo.selected.direccionRegional"
-                   ng-disabled="!access.administrarTrabajadores" pf-focused="true"
+                   ng-disabled="!(access.administrarTrabajadores || access.administrarTrabajadoresDireccionRegional)" pf-focused="true"
                    autofocus required>
           <ui-select-match placeholder="Direccion regional">{{$select.selected.denominacion}}</ui-select-match>
           <ui-select-choices repeat="item in combo.direccionRegional | filter: $select.search">
@@ -38,7 +38,7 @@
 
       <div class="col-sm-3">
         <ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento"
-                   ng-disabled="!(access.administrarTrabajadores || access.administrarTrabajadoresAgencia)" required>
+                   ng-disabled="!(access.administrarTrabajadores || access.administrarTrabajadoresDireccionRegional)" required>
           <ui-select-match placeholder="Documento">{{$select.selected.abreviatura}}</ui-select-match>
           <ui-select-choices repeat="item in combo.tipoDocumento | filter: $select.search">
             <div data-ng-bind-html="item.abreviatura | highlight: $select.search"></div>
