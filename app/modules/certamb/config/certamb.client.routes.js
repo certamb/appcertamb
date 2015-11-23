@@ -4,7 +4,7 @@
 angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
   function ($stateProvider, $urlRouterProvider) {
 
-    var checkUserRole = function (role, $q, $timeout, $http, $location, Auth) {
+    /*var checkUserRole = function (role, $q, $timeout, $http, $location, Auth) {
       var deferred = $q.defer();
       if (Auth.authz.hasResourceRole(role, 'certamb_app')) {
         $timeout(deferred.resolve);
@@ -15,9 +15,9 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         $location.path('/');
       }
       return deferred.promise;
-    };
+    };*/
 
-    var checkUserRole2 = function (role, $q, $timeout, $http, $location, Auth) {
+    var checkUserRole = function (role, $q, $timeout, $http, $location, Auth) {
       var realm = 'certamb_app';
       var result = false;
       var deferred = $q.defer();
@@ -159,7 +159,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.Organizacion.Trabajador.BuscarController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['ver-trabajadores', 'ver-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -172,7 +172,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.Organizacion.Trabajador.CrearController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['ver-trabajadores', 'ver-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -185,7 +185,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'modules/certamb/views/organizacion/trabajador/form-editar.html',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['administrar-trabajadores', 'administrar-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
           trabajador: function ($state, $stateParams, SGTrabajador) {
             return SGTrabajador.$find($stateParams.trabajador);
@@ -203,7 +203,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.Organizacion.Trabajador.Editar.ResumenController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['administrar-trabajadores', 'administrar-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -216,7 +216,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.Organizacion.Trabajador.Editar.AccesoSistemaController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['administrar-trabajadores', 'administrar-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
