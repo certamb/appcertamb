@@ -21,7 +21,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
       var realm = 'certamb_app';
       var result = false;
       var deferred = $q.defer();
-      
+
       if(angular.isArray(role)){
         for(var i=0;i<role.length;i++){
           if (Auth.authz.hasResourceRole(role[i], realm)) {
@@ -33,7 +33,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           result = true;
         }
       }
-      
+
       if (result) {
         $timeout(deferred.resolve);
       } else {
@@ -187,18 +187,18 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           loggedin: function ($q, $timeout, $http, $location, Auth) {
             return checkUserRole(['administrar-trabajadores', 'administrar-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
-          trabajador: function ($state, $stateParams, SGTrabajador, DIRECCION_REGIONAL) {
+          trabajador: function ($state, $stateParams, $timeout, SGTrabajador, DIRECCION_REGIONAL) {
             var deferred = $q.defer();
             SGTrabajador.$find($stateParams.trabajador).then(
               function(response){
-                if (DIRECCION_REGIONAL.id === response.id) {
+                if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
                   $timeout(deferred.resolve);
                 } else {
                   $timeout(deferred.reject);
                 }
               }, function error(err) {
                 $timeout(deferred.reject);
-              } 
+              }
             );
           }
         },
@@ -261,7 +261,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.CertificacionAmbiental.Proyecto.BuscarController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-proyectos', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['ver-proyectos', 'ver-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -274,7 +274,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.CertificacionAmbiental.Proyecto.CrearController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-proyectos', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -287,7 +287,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'modules/certamb/views/certificacionAmbiental/proyecto/form-editar.html',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-proyectos', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
           proyecto: function ($state, $stateParams, SGProyecto) {
             return SGProyecto.$find($stateParams.proyecto);
@@ -305,7 +305,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.CertificacionAmbiental.Proyecto.Editar.ResumenController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-proyectos', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -318,7 +318,21 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.CertificacionAmbiental.Proyecto.Editar.DatosPrincipalesController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-proyectos', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
+          },
+          proyecto: function($state, $stateParams, $timeout, SGProyecto, DIRECCION_REGIONAL){
+            var deferred = $q.defer();
+            SGProyecto.$find($stateParams.proyecto).then(
+              function(response){
+                if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
+                  $timeout(deferred.resolve);
+                } else {
+                  $timeout(deferred.reject);
+                }
+              }, function error(err) {
+                $timeout(deferred.reject);
+              }
+            );
           }
         },
         ncyBreadcrumb: {
@@ -331,7 +345,21 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.CertificacionAmbiental.Proyecto.Editar.ProcedimientoController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-proyectos', $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
+          },
+          proyecto: function($state, $stateParams, $timeout, SGProyecto, DIRECCION_REGIONAL){
+            var deferred = $q.defer();
+            SGProyecto.$find($stateParams.proyecto).then(
+              function(response){
+                if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
+                  $timeout(deferred.resolve);
+                } else {
+                  $timeout(deferred.reject);
+                }
+              }, function error(err) {
+                $timeout(deferred.reject);
+              }
+            );
           }
         },
         ncyBreadcrumb: {
