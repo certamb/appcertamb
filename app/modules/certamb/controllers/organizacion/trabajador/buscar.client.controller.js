@@ -2,19 +2,25 @@
 
 /* jshint -W098 */
 angular.module('certamb').controller('Certamb.Organizacion.Trabajador.BuscarController',
-    function ($scope, $state, SGDireccionRegional, SGPersonaNatural) {
+    function ($scope, $state, DIRECCION_REGIONAL, SGDireccionRegional, SGPersonaNatural) {
 
         $scope.combo = {
             direccionRegional: undefined
         };
         $scope.combo.selected = {
-            direccionRegional: undefined
+            direccionRegional: DIRECCION_REGIONAL ? DIRECCION_REGIONAL : undefined,
         };
 
         $scope.loadCombo = function () {
-            SGDireccionRegional.$getAll().then(function (response) {
+            if ($scope.access.administrarTrabajadores) {
+              SGDireccionRegional.$getAll().then(function(response){
                 $scope.combo.direccionRegional = response;
-            });
+              });
+            } else if ($scope.access.administrarTrabajadoresDireccionRegional) {
+              $scope.combo.direccionRegional = [DIRECCION_REGIONAL];
+            } else {
+              console.log('User not authenticated for this action.');
+            }
         };
         $scope.loadCombo();
 
