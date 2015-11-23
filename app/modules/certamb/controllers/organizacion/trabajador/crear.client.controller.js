@@ -32,9 +32,15 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.CrearContr
                 $scope.combo.tipoDocumento = response.items;
             });
 
-            SGDireccionRegional.$getAll().then(function (response1) {
-                $scope.combo.direccionRegional = response1;
-            });
+            if ($scope.access.administrarTrabajadores) {
+              SGDireccionRegional.$getAll().then(function(response){
+                $scope.combo.direccionRegional = response;
+              });
+            } else if ($scope.access.administrarTrabajadoresDireccionRegional) {
+              $scope.combo.direccionRegional = [DIRECCION_REGIONAL];
+            } else {
+              console.log('User not authenticated for this action.');
+            }
         };
         $scope.loadCombo();
 
