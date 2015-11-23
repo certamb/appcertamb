@@ -19,7 +19,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 window.auth = {};
 window.auth.keycloakUrl = 'https://certambkeycloak-softgreen.rhcloud.com/auth';
 window.auth.keycloakRealm = 'certamb';
-window.auth.keycloakClientId = 'certamb-app';
+window.auth.keycloakClientId = 'certamb_app';
 
 window.auth.certambUrl = 'http://localhost:8080/certamb/rest';
 window.auth.personaUrl = 'http://localhost:8080/persona/rest';
