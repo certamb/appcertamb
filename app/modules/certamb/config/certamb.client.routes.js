@@ -292,7 +292,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'modules/certamb/views/certificacionAmbiental/proyecto/form-editar.html',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['ver-proyectos', 'ver-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
           proyecto: function ($state, $stateParams, SGProyecto) {
             return SGProyecto.$find($stateParams.proyecto);
@@ -310,7 +310,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Certamb.CertificacionAmbiental.Proyecto.Editar.ResumenController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
+            return checkUserRole(['ver-proyectos', 'ver-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -325,19 +325,18 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           loggedin: function ($q, $timeout, $http, $location, Auth) {
             return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
-          proyecto: function($state, $stateParams, $timeout, SGProyecto, DIRECCION_REGIONAL){
+          proyecto: function($q, $state, $stateParams, $timeout, proyecto, DIRECCION_REGIONAL){
             var deferred = $q.defer();
-            SGProyecto.$find($stateParams.proyecto).then(
-              function(response){
-                if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
-                  $timeout(deferred.resolve);
-                } else {
-                  $timeout(deferred.reject);
-                }
-              }, function error(err) {
+            if(!DIRECCION_REGIONAL){
+              $timeout(deferred.resolve(proyecto));
+            } else {
+              if (DIRECCION_REGIONAL.id === proyecto.direccionRegional.id) {
+                $timeout(deferred.resolve(proyecto));
+              } else {
                 $timeout(deferred.reject);
               }
-            );
+            }
+            return deferred.promise;
           }
         },
         ncyBreadcrumb: {
@@ -352,19 +351,18 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           loggedin: function ($q, $timeout, $http, $location, Auth) {
             return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
-          proyecto: function($state, $stateParams, $timeout, SGProyecto, DIRECCION_REGIONAL){
+          proyecto: function($q, $state, $stateParams, $timeout, proyecto, DIRECCION_REGIONAL){
             var deferred = $q.defer();
-            SGProyecto.$find($stateParams.proyecto).then(
-              function(response){
-                if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
-                  $timeout(deferred.resolve);
-                } else {
-                  $timeout(deferred.reject);
-                }
-              }, function error(err) {
+            if(!DIRECCION_REGIONAL){
+              $timeout(deferred.resolve(proyecto));
+            } else {
+              if (DIRECCION_REGIONAL.id === proyecto.direccionRegional.id) {
+                $timeout(deferred.resolve(proyecto));
+              } else {
                 $timeout(deferred.reject);
               }
-            );
+            }
+            return deferred.promise;
           }
         },
         ncyBreadcrumb: {
