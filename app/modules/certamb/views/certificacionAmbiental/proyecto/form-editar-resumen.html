@@ -13,6 +13,8 @@
                       <dd data-ng-bind="view.proyecto.estado"></dd>
                       <dt data-ng-if="view.proyecto.fechaVigenciaDesde">Vigencia:</dt>
                       <dd data-ng-if="view.proyecto.fechaVigenciaDesde" data-ng-bind-template="{{view.proyecto.fechaVigenciaDesde | date: 'dd/MM/yyyy'}}&nbsp;a&nbsp;{{view.proyecto.fechaVigenciaHasta| date: 'dd/MM/yyyy'}} "></dd>
+                      <dd data-ng-if="view.proyecto.fechaVigenciaDesde && vencido()"><span class="label label-danger">Vencido</span></dd>
+                      <dd data-ng-if="view.proyecto.fechaVigenciaDesde && !vencido()"><span class="label label-info">Vigente</span></dd>
                     </dl>
                 </fieldset>
                 <fieldset class="border-top">
