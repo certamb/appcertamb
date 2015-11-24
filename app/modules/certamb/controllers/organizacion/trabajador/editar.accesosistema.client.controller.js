@@ -14,6 +14,13 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.Editar.Acc
     $scope.crearUsuarioKeycloak = function () {
       $window.open(SGUsuarioKeycloak.$getCreateRealmUserUrl());
     };
+    $scope.editarRolesUsuarioKeycloak = function(){
+      SGUsuarioKeycloak.$search({username: $scope.view.trabajador.usuario, max: 1}).then(function (response) {
+          if (response.length) {
+            $window.open(SGUsuarioKeycloak.$getRoleMappingsUserUrl(response[0].id));
+          }
+      });
+    };
 
     $scope.desvincular = function () {
       SGDialog.confirm('Desvincular', 'Estas seguro de quitar el usuario para el trabajador?', function () {

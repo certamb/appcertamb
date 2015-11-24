@@ -25,6 +25,11 @@
           <div class="has-error" ng-message="disponible">Usuario no disponible.</div>
         </div>
       </div>
+      <div class="col-sm-2" data-ng-if="view.trabajador.usuario">
+        <a href="" data-ng-click="editarRolesUsuarioKeycloak()" class="btn btn-link"
+           uib-tooltip="Crear un nuevo usuario."
+           uib-tooltip-placement="right">Asignar rol</a>
+      </div>
       <div class="col-sm-3">
         <a href="" data-ng-click="crearUsuarioKeycloak()" class="btn btn-link"
            uib-tooltip="Crear un nuevo usuario."

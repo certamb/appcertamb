@@ -8,7 +8,7 @@ angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfig
 // Setting HTML5 Location Mode
 /* jshint ignore:start */
 angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider',
-  function($locationProvider) {
+  function ($locationProvider) {
     $locationProvider.hashPrefix('!');
   }
 ]);
@@ -250,6 +250,10 @@ angular.module('mean').factory('SGUsuarioKeycloak', ['KeycloakRestangular', 'REA
   var url = 'users';
 
   var modelMethos = {
+    $new: function (id) {
+      return angular.extend({id: id}, modelMethos);
+    },
+
     $find: function (id) {
       return KeycloakRestangular.one(url, id).get();
     },
@@ -268,6 +272,13 @@ angular.module('mean').factory('SGUsuarioKeycloak', ['KeycloakRestangular', 'REA
     },
     $getCreateRealmUserUrl: function () {
       return REALM.authServerUrl + '/admin/' + REALM.name + '/console/#/create/user/' + REALM.name;
+    },
+    $getRoleMappingsUserUrl: function (id) {
+      return REALM.authServerUrl + '/admin/' + REALM.name + '/console/#/realms/' + REALM.name + '/users/' + id + '/role-mappings';
+    },
+
+    $remove: function () {
+      return KeycloakRestangular.one(url, this.id).remove();
     }
 
   };
