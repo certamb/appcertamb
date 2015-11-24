@@ -187,17 +187,22 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           loggedin: function ($q, $timeout, $http, $location, Auth) {
             return checkUserRole(['administrar-trabajadores', 'administrar-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
-          trabajador: function ($q, $state, $stateParams, $timeout, SGTrabajador, DIRECCION_REGIONAL) {
+          trabajador: function ($q, $state, $stateParams, $timeout, SGTrabajador, DIRECCION_REGIONAL, Auth) {
             var deferred = $q.defer();
             SGTrabajador.$find($stateParams.trabajador).then(
               function(response){
-                if(!DIRECCION_REGIONAL || !response.direccionRegional){
+                if(!DIRECCION_REGIONAL){
                   $timeout(deferred.resolve(response));
                 } else {
-                  if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
+                  var realm = 'certamb_app';
+                  if (Auth.authz.hasResourceRole('administrar-trabajadores', 'certamb_app')) {
                     $timeout(deferred.resolve(response));
                   } else {
-                    $timeout(deferred.reject);
+                    if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
+                      $timeout(deferred.resolve(response));
+                    } else {
+                      $timeout(deferred.reject);
+                    }
                   }
                 }
               }, function error(err) {
