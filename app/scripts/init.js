@@ -95,7 +95,7 @@ angular.element(document).ready(function () {
 
 
 angular.module('mean').controller('KeycloakController',
-  function ($scope, Auth, DIRECCION_REGIONAL, TRABAJADOR) {
+  function ($scope, Auth, DIRECCION_REGIONAL, TRABAJADOR, SGPersonaNatural) {
 
     $scope.logout = function () {
       Auth.authz.logout();
@@ -122,6 +122,18 @@ angular.module('mean').controller('KeycloakController',
     $scope.session = {};
     $scope.session.direccionRegional = DIRECCION_REGIONAL;
     $scope.session.trabajador = TRABAJADOR;
+
+
+    var criteria1 = {
+      filters: [
+        {name: 'tipoDocumento.abreviatura', value: $scope.session.trabajador.tipoDocumento, operator: 'eq'},
+        {name: 'numeroDocumento', value: $scope.session.trabajador.numeroDocumento, operator: 'eq'}
+      ], paging: {page: 1, pageSize: 20}
+    };
+    SGPersonaNatural.$search(criteria1).then(function (response) {
+      $scope.session.persona = response.items[0];
+    });
+
   }
 );
 

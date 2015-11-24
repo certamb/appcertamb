@@ -32,6 +32,13 @@
       </li>
       <li>
         <a href="">
+          <strong>D.R.: </strong>
+          <span ng-bind="session.direccionRegional.denominacion"></span>
+          <span ng-if="!session.direccionRegional">No definido</span>
+        </a>
+      </li>
+      <li>
+        <a href="">
           <strong>Usuario: </strong>
           <span ng-bind="user.username"></span>
         </a>
@@ -56,6 +63,12 @@
               <span ng-bind="session.trabajador.tipoDocumento"></span>
               <span ng-bind="session.trabajador.numeroDocumento"></span>
               <span ng-if="!session.trabajador">No definido</span>
+            </li>
+            <li class="list-group-item">
+              <span class="i fa fa-angle-double-right"></span>
+              <span>Persona: </span>
+              <span ng-bind-template="{{session.persona.apellidoPaterno}}&nbsp;{{session.persona.apellidoMaterno}},&nbsp;{{session.persona.nombres}}"></span>
+              <span ng-if="!session.persona">No definido</span>
             </li>
           </ul>
         </div>
