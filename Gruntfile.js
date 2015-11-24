@@ -511,7 +511,7 @@ module.exports = function (grunt) {
       target: {
         options: {
           war_dist_folder: '<%= yeoman.dist %>',
-          war_name: 'mean',
+          war_name: 'app',
           webxml_welcome: 'index.html',
           webxml_display_name: 'Mean',
           webxml_mime_mapping: [
