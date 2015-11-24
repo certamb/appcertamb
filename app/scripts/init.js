@@ -124,15 +124,17 @@ angular.module('mean').controller('KeycloakController',
     $scope.session.trabajador = TRABAJADOR;
 
 
-    var criteria1 = {
-      filters: [
-        {name: 'tipoDocumento.abreviatura', value: $scope.session.trabajador.tipoDocumento, operator: 'eq'},
-        {name: 'numeroDocumento', value: $scope.session.trabajador.numeroDocumento, operator: 'eq'}
-      ], paging: {page: 1, pageSize: 20}
-    };
-    SGPersonaNatural.$search(criteria1).then(function (response) {
-      $scope.session.persona = response.items[0];
-    });
+    if(TRABAJADOR){
+      var criteria1 = {
+        filters: [
+          {name: 'tipoDocumento.abreviatura', value: $scope.session.trabajador.tipoDocumento, operator: 'eq'},
+          {name: 'numeroDocumento', value: $scope.session.trabajador.numeroDocumento, operator: 'eq'}
+        ], paging: {page: 1, pageSize: 20}
+      };
+      SGPersonaNatural.$search(criteria1).then(function (response) {
+        $scope.session.persona = response.items[0];
+      });
+    }
 
   }
 );
