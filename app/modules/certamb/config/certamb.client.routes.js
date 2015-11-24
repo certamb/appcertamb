@@ -325,15 +325,20 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           loggedin: function ($q, $timeout, $http, $location, Auth) {
             return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
-          proyecto: function($q, $state, $stateParams, $timeout, proyecto, DIRECCION_REGIONAL){
+          proyecto: function($q, $state, $stateParams, $timeout, proyecto, DIRECCION_REGIONAL, Auth){
             var deferred = $q.defer();
             if(!DIRECCION_REGIONAL){
               $timeout(deferred.resolve(proyecto));
             } else {
-              if (DIRECCION_REGIONAL.id === proyecto.direccionRegional.id) {
+              var realm = 'certamb_app';
+              if (Auth.authz.hasResourceRole('administrar-proyectos', 'certamb_app')) {
                 $timeout(deferred.resolve(proyecto));
               } else {
-                $timeout(deferred.reject);
+                if (DIRECCION_REGIONAL.id === proyecto.direccionRegional.id) {
+                  $timeout(deferred.resolve(proyecto));
+                } else {
+                  $timeout(deferred.reject);
+                }
               }
             }
             return deferred.promise;
@@ -351,15 +356,20 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           loggedin: function ($q, $timeout, $http, $location, Auth) {
             return checkUserRole(['administrar-proyectos', 'administrar-proyectos-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
-          proyecto: function($q, $state, $stateParams, $timeout, proyecto, DIRECCION_REGIONAL){
+          proyecto: function($q, $state, $stateParams, $timeout, proyecto, DIRECCION_REGIONAL, Auth){
             var deferred = $q.defer();
             if(!DIRECCION_REGIONAL){
               $timeout(deferred.resolve(proyecto));
             } else {
-              if (DIRECCION_REGIONAL.id === proyecto.direccionRegional.id) {
+              var realm = 'certamb_app';
+              if (Auth.authz.hasResourceRole('administrar-proyectos', 'certamb_app')) {
                 $timeout(deferred.resolve(proyecto));
               } else {
-                $timeout(deferred.reject);
+                if (DIRECCION_REGIONAL.id === proyecto.direccionRegional.id) {
+                  $timeout(deferred.resolve(proyecto));
+                } else {
+                  $timeout(deferred.reject);
+                }
               }
             }
             return deferred.promise;
