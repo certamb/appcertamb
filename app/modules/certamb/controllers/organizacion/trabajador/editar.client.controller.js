@@ -15,7 +15,7 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.EditarCont
                 $scope.view.trabajador.$remove().then(
                     function (response) {
                         toastr.success('Trabajador eliminado');
-                        $state.go('configuracion.app.organizacion.trabajador.buscar');
+                        $state.go('certamb.app.organizacion.trabajador.buscar');
                     },
                     function error(err) {
                         toastr.error(err.data.message);

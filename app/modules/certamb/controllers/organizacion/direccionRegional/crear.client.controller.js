@@ -16,7 +16,8 @@ angular.module('certamb').controller('Certamb.Organizacion.DireccionRegional.Cre
                 function (response) {
                     toastr.success('Direccion regional creada');
                     $scope.working = false;
-                    $state.go('^.editar', {personaNatural: response.id});
+                    $state.go('^.buscar');
+                    //$state.go('^.editar', {personaNatural: response.id});
                 },
                 function error(err) {
                     toastr.error(err.data.message);

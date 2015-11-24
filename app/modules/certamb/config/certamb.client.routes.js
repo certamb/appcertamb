@@ -187,19 +187,24 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
           loggedin: function ($q, $timeout, $http, $location, Auth) {
             return checkUserRole(['administrar-trabajadores', 'administrar-trabajadores-direccionRegional'], $q, $timeout, $http, $location, Auth);
           },
-          trabajador: function ($state, $stateParams, $timeout, SGTrabajador, DIRECCION_REGIONAL) {
+          trabajador: function ($q, $state, $stateParams, $timeout, SGTrabajador, DIRECCION_REGIONAL) {
             var deferred = $q.defer();
             SGTrabajador.$find($stateParams.trabajador).then(
               function(response){
-                if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
-                  $timeout(deferred.resolve);
+                if(!DIRECCION_REGIONAL || !response.direccionRegional){
+                  $timeout(deferred.resolve(response));
                 } else {
-                  $timeout(deferred.reject);
+                  if (DIRECCION_REGIONAL.id === response.direccionRegional.id) {
+                    $timeout(deferred.resolve(response));
+                  } else {
+                    $timeout(deferred.reject);
+                  }
                 }
               }, function error(err) {
                 $timeout(deferred.reject);
               }
             );
+            return deferred.promise;
           }
         },
         controller: 'Certamb.Organizacion.Trabajador.EditarController',
