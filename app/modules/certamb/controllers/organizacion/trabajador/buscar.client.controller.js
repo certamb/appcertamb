@@ -16,6 +16,7 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.BuscarCont
         SGDireccionRegional.$getAll().then(function (response) {
           $scope.combo.direccionRegional = response;
           $scope.combo.direccionRegional.unshift({denominacion: 'Todos', valor: 'TODO'});
+          $scope.combo.selected.direccionRegional = $scope.combo.direccionRegional[0];
         });
       } else if ($scope.access.administrarTrabajadoresDireccionRegional) {
         $scope.combo.direccionRegional = [DIRECCION_REGIONAL];
