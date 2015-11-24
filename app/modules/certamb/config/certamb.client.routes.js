@@ -50,7 +50,7 @@ angular.module('certamb').config(['$stateProvider', '$urlRouterProvider',
     $urlRouterProvider.when('/certamb/app/organizacion/trabajadores/editar/:trabajador', '/certamb/app/organizacion/trabajadores/editar/:trabajador/resumen');
 
 
-    //$urlRouterProvider.when('/certamb/app', '/certamb/app/certificacionesAmbientales/proyectos');
+    $urlRouterProvider.when('/certamb/app', '/certamb/app/certificacionesAmbientales/proyectos');
     $urlRouterProvider.when('/certamb/app/certificacionesAmbientales/proyectos', '/certamb/app/certificacionesAmbientales/proyectos/buscar');
     $urlRouterProvider.when('/certamb/app/certificacionesAmbientales/proyectos/editar/:proyecto', '/certamb/app/certificacionesAmbientales/proyectos/editar/:proyecto/resumen');
 

@@ -4,25 +4,30 @@
 angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
   function ($stateProvider, $urlRouterProvider) {
 
-    // Check if user has role
     var checkUserRole = function (role, $q, $timeout, $http, $location, Auth) {
-
-      // Initialize a new promise
+      var realm = 'certamb_app';
+      var result = false;
       var deferred = $q.defer();
 
-      // ver-personas
-      if (Auth.authz.hasResourceRole(role, 'persona')) {
-        $timeout(deferred.resolve);
+      if(angular.isArray(role)){
+        for(var i=0;i<role.length;i++){
+          if (Auth.authz.hasResourceRole(role[i], realm)) {
+            result = true;
+          }
+        }
+      } else {
+        if (Auth.authz.hasResourceRole(role, 'certamb_app')) {
+          result = true;
+        }
       }
 
-      // Not ver-personas
-      else {
+      if (result) {
+        $timeout(deferred.resolve);
+      } else {
         $timeout(deferred.reject);
-        //$location.url('/auth/login');
         alert('No tiene los permisos para poder acceder a esta pagina');
         $location.path('/');
       }
-
       return deferred.promise;
     };
 
@@ -98,7 +103,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Persona.TipoDocumento.CrearTipoDocumentoController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-documentos', $q, $timeout, $http, $location, Auth);
+            return checkUserRole('administrar-documentos', $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -111,7 +116,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'modules/persona/views/tipoDocumento/form-editar-tipoDocumento.html',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-documentos', $q, $timeout, $http, $location, Auth);
+            return checkUserRole('administrar-documentos', $q, $timeout, $http, $location, Auth);
           },
           tipoDocumento: function ($state, $stateParams, SGTipoDocumento) {
             return SGTipoDocumento.$find($stateParams.documento);
@@ -150,7 +155,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Persona.Natural.CrearPersonaNaturalController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-personas', $q, $timeout, $http, $location, Auth);
+            return checkUserRole('administrar-personas', $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -191,7 +196,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Persona.Natural.EditarPersonaNatural.DatosPrincipalesController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-personas', $q, $timeout, $http, $location, Auth);
+            return checkUserRole('administrar-personas', $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
@@ -203,7 +208,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
         controller: 'Persona.Natural.EditarPersonaNatural.DatosAdicionalesController',
         resolve: {
           loggedin: function ($q, $timeout, $http, $location, Auth) {
-            return checkUserRole('ver-personas', $q, $timeout, $http, $location, Auth);
+            return checkUserRole('administrar-personas', $q, $timeout, $http, $location, Auth);
           }
         },
         ncyBreadcrumb: {
