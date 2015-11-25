@@ -14,18 +14,36 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.Editar.Acc
     $scope.crearUsuarioKeycloak = function () {
       $window.open(SGUsuarioKeycloak.$getCreateRealmUserUrl());
     };
-    $scope.editarRolesUsuarioKeycloak = function(){
+    $scope.editarRolesUsuarioKeycloak = function () {
       SGUsuarioKeycloak.$search({username: $scope.view.trabajador.usuario, max: 1}).then(function (response) {
-          if (response.length) {
-            $window.open(SGUsuarioKeycloak.$getRoleMappingsUserUrl(response[0].id));
-          }
+        if (response.length) {
+          $window.open(SGUsuarioKeycloak.$getRoleMappingsUserUrl(response[0].id));
+        }
       });
     };
 
     $scope.desvincular = function () {
       SGDialog.confirm('Desvincular', 'Estas seguro de quitar el usuario para el trabajador?', function () {
+
+        $scope.working = true;
+
+        SGUsuarioKeycloak.$search({username: $scope.view.trabajador.usuario, max: 1}).then(function (response) {
+          if (response.length) {
+            //eliminar usuario
+            var keycloakUser = SGUsuarioKeycloak.$new(response[0].id);
+            keycloakUser.$remove().then(
+              function () {
+                toastr.success('Usuario eliminado');
+              }, function error(err) {
+                toastr.warning('Usuario no pudo ser eliminado');
+              }
+            );
+          }
+        });
+
         $scope.view.trabajador.$removeUsuario().then(
           function (response) {
+            $scope.working = false;
             toastr.success('Trabajador actualizado');
             $scope.view.usuario = undefined;
             $scope.view.trabajador.usuario = undefined;
@@ -34,6 +52,9 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.Editar.Acc
             toastr.error(err.data.errorMessage);
           }
         );
+
+
+
       });
     };
 
@@ -68,7 +89,7 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.Editar.Acc
           $scope.working = false;
           toastr.warning('Usuario no encontrado en Keycloak');
         }
-      }, function error(err){
+      }, function error(err) {
         $scope.working = false;
       });
 
