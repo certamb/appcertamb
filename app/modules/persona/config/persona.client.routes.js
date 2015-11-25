@@ -25,7 +25,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
         $timeout(deferred.resolve);
       } else {
         $timeout(deferred.reject);
-        alert('No tiene los permisos para poder acceder a esta pagina');
+        //alert('No tiene los permisos para poder acceder a esta pagina');
         $location.path('/');
       }
       return deferred.promise;
