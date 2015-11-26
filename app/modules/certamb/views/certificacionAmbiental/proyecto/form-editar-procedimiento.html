@@ -1,13 +1,17 @@
 <form name="form" class="form-horizontal" sg-read-only="!accessProyecto()" novalidate>
 
   <fieldset class="border-top" data-ng-if="view.load.historialActivo.procedimiento.sugerencias">
-    <legend><span class="text ng-scope">Procedimientos sugeridos <i class="fa fa-question-circle text-muted ng-scope" uib-tooltip="Aca se listan los procedimientos sugeridos segun el estado actual del proceso." uib-tooltip-placement="right"></i></span></legend>
+    <legend><span class="text ng-scope">Procedimientos sugeridos <i class="fa fa-question-circle text-muted ng-scope"
+                                                                    uib-tooltip="Aca se listan los procedimientos sugeridos segun el estado actual del proceso."
+                                                                    uib-tooltip-placement="right"></i></span></legend>
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Sugeridos:</label>
+
       <div class="col-sm-10">
         <div class="btn-group">
-          <label data-ng-repeat="item in view.load.historialActivo.procedimiento.sugerencias | orderBy: 'prioridad'" class="btn btn-default" ng-model="view.sugerencia" uib-btn-radio="item" uncheckable>
+          <label data-ng-repeat="item in view.load.historialActivo.procedimiento.sugerencias | orderBy: 'prioridad'"
+                 class="btn btn-default" ng-model="view.sugerencia" uib-btn-radio="item" uncheckable>
             <span data-ng-bind="item.procedimientoSugerencia.denominacion"></span>
           </label>
         </div>
@@ -16,11 +20,16 @@
   </fieldset>
 
   <fieldset class="border-top">
-    <legend><span class="text ng-scope">Nueva etapa del procedimiento <i class="fa fa-question-circle text-muted ng-scope" uib-tooltip="Este formulario representa el nuevo estado de la solicitud de certificacion ambiental. Use esta ventana para avanzar los pasos." uib-tooltip-placement="right"></i></span></legend>
+    <legend><span class="text ng-scope">Nueva etapa del procedimiento <i
+      class="fa fa-question-circle text-muted ng-scope"
+      uib-tooltip="Este formulario representa el nuevo estado de la solicitud de certificacion ambiental. Use esta ventana para avanzar los pasos."
+      uib-tooltip-placement="right"></i></span></legend>
     <div class="form-group" data-ng-class="{ 'has-error' : form.etapa.$invalid && form.$submitted }">
       <label class="col-sm-2 control-label"><span class="required">*</span> Etapa:</label>
+
       <div class="col-sm-4">
-        <ui-select name="etapa" data-ng-model="combo.selected.etapa" pf-focused="true" ng-disabled="!accessProyecto()" autofocus required>
+        <ui-select name="etapa" data-ng-model="combo.selected.etapa" pf-focused="true" ng-disabled="!accessProyecto()"
+                   autofocus required>
           <ui-select-match placeholder="Etapa">{{$select.selected.denominacion}}</ui-select-match>
           <ui-select-choices repeat="item in combo.etapa | orderBy:'orden' | filter: $select.search">
             <div data-ng-bind-html="item.denominacion | highlight: $select.search"></div>
@@ -33,8 +42,10 @@
     </div>
     <div class="form-group" data-ng-class="{ 'has-error' : form.procedimiento.$invalid && form.$submitted }">
       <label class="col-sm-2 control-label"><span class="required">*</span> Procedimiento:</label>
+
       <div class="col-sm-5">
-        <ui-select name="procedimiento" data-ng-model="combo.selected.procedimiento" ng-disabled="!accessProyecto()" required>
+        <ui-select name="procedimiento" data-ng-model="combo.selected.procedimiento" ng-disabled="!accessProyecto()"
+                   required>
           <ui-select-match placeholder="Etapa">{{$select.selected.denominacion}}</ui-select-match>
           <ui-select-choices repeat="item in combo.procedimiento | orderBy:'orden' | filter: $select.search">
             <div data-ng-bind-html="item.denominacion | highlight: $select.search"></div>
@@ -45,8 +56,10 @@
         </div>
       </div>
     </div>
-    <div data-ng-if="combo.selected.procedimiento.requiereCategoria" class="form-group" data-ng-class="{ 'has-error' : form.categoria.$invalid && form.$submitted }">
+    <div data-ng-if="combo.selected.procedimiento.requiereCategoria" class="form-group"
+         data-ng-class="{ 'has-error' : form.categoria.$invalid && form.$submitted }">
       <label class="col-sm-2 control-label"><span class="required">*</span> Categoria:</label>
+
       <div class="col-sm-4">
         <ui-select name="categoria" data-ng-model="combo.selected.categoria" ng-disabled="!accessProyecto()" required>
           <ui-select-match placeholder="Seleccione">{{$select.selected.denominacion}}</ui-select-match>
@@ -61,19 +74,28 @@
       </div>
       <div class="col-sm-4">
         <div class="btn-group">
-          <label class="btn btn-default" ng-model="combo.selected.categoria" uib-btn-radio="combo.categoria[0]">CAT.  I</label>
-          <label class="btn btn-default" ng-model="combo.selected.categoria" uib-btn-radio="combo.categoria[1]">CAT. II</label>
-          <label class="btn btn-default" ng-model="combo.selected.categoria" uib-btn-radio="combo.categoria[2]">CAT.III</label>
+          <label class="btn btn-default" ng-model="combo.selected.categoria" uib-btn-radio="combo.categoria[0]">CAT.
+            I</label>
+          <label class="btn btn-default" ng-model="combo.selected.categoria" uib-btn-radio="combo.categoria[1]">CAT.
+            II</label>
+          <label class="btn btn-default" ng-model="combo.selected.categoria"
+                 uib-btn-radio="combo.categoria[2]">CAT.III</label>
         </div>
       </div>
     </div>
 
-    <div data-ng-if="combo.selected.procedimiento.requiereFechaVigencia" class="form-group" data-ng-class="{ 'has-error' : (form.fechaVigenciaDesde.$invalid || form.fechaVigenciaHasta.$invalid) && form.$submitted }">
+    <div data-ng-if="combo.selected.procedimiento.requiereFechaVigencia" class="form-group"
+         data-ng-class="{ 'has-error' : (form.fechaVigenciaDesde.$invalid || form.fechaVigenciaHasta.$invalid) && form.$submitted }">
       <label class="col-sm-2 control-label"><span class="required">*</span> Fecha vigencia:</label>
+
       <div class="col-sm-2" data-ng-controller="Persona.Util.DateController">
         <div class="input-group">
-          <input type="text" name="fechaVigenciaDesde" class="form-control" data-ng-model="view.historial.fechaVigenciaDesde" uib-datepicker-popup="dd/MM/yyyy" is-open="opened" datepicker-options="dateOptions" data-ng-required="true" close-text="Close" placeholder="dd/mm/yyyy" required>
-          <span class="input-group-btn"><button class="btn btn-default" type="button" data-ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button></span>
+          <input type="text" name="fechaVigenciaDesde" class="form-control"
+                 data-ng-model="view.historial.fechaVigenciaDesde" uib-datepicker-popup="dd/MM/yyyy" is-open="opened"
+                 datepicker-options="dateOptions" data-ng-required="true" close-text="Close" placeholder="dd/mm/yyyy"
+                 required>
+          <span class="input-group-btn"><button class="btn btn-default" type="button" data-ng-click="open($event)"><span
+            class="glyphicon glyphicon-calendar"></span></button></span>
         </div>
         <div data-ng-messages="form.fechaVigenciaDesde.$error" data-ng-if="form.$submitted">
           <div class="has-error" data-ng-message="required">Ingrese fecha desde.</div>
@@ -81,8 +103,12 @@
       </div>
       <div class="col-sm-2" data-ng-controller="Persona.Util.DateController">
         <div class="input-group">
-          <input type="text" name="fechaVigenciaHasta" class="form-control" data-ng-model="view.historial.fechaVigenciaHasta" uib-datepicker-popup="dd/MM/yyyy" is-open="opened" datepicker-options="dateOptions" data-ng-required="true" close-text="Close" placeholder="dd/mm/yyyy" required>
-          <span class="input-group-btn"><button class="btn btn-default" type="button" data-ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button></span>
+          <input type="text" name="fechaVigenciaHasta" class="form-control"
+                 data-ng-model="view.historial.fechaVigenciaHasta" uib-datepicker-popup="dd/MM/yyyy" is-open="opened"
+                 datepicker-options="dateOptions" data-ng-required="true" close-text="Close" placeholder="dd/mm/yyyy"
+                 required>
+          <span class="input-group-btn"><button class="btn btn-default" type="button" data-ng-click="open($event)"><span
+            class="glyphicon glyphicon-calendar"></span></button></span>
         </div>
         <div data-ng-messages="form.fechaVigenciaHasta.$error" data-ng-if="form.$submitted">
           <div class="has-error" data-ng-message="required">Ingrese fecha hasta.</div>
@@ -90,10 +116,14 @@
       </div>
     </div>
 
-    <div data-ng-if="combo.selected.procedimiento.requiereResolucion" class="form-group" data-ng-class="{ 'has-error' : form.resolucion.$invalid && form.$submitted }">
+    <div data-ng-if="combo.selected.procedimiento.requiereResolucion" class="form-group"
+         data-ng-class="{ 'has-error' : form.resolucion.$invalid && form.$submitted }">
       <label class="col-sm-2 control-label"><span class="required">*</span> Resolucion:</label>
+
       <div class="col-sm-4">
-        <input name="resolucion" type="text" data-ng-model="view.historial.resolucion" data-ng-maxlength="300" class="form-control" required capitalize/>
+        <input name="resolucion" type="text" data-ng-model="view.historial.resolucion" data-ng-maxlength="300"
+               class="form-control" required capitalize/>
+
         <div data-ng-messages="form.resolucion.$error" data-ng-if="form.$submitted">
           <div class="has-error" data-ng-message="required">Ingrese resolucion.</div>
           <div class="has-error" data-ng-message="maxlength">Maximo 300 caracteres.</div>
@@ -102,8 +132,9 @@
     </div>
     <div class="form-group" data-ng-class="{ 'has-error' : form.observacion.$invalid && form.$submitted }">
       <label class="col-sm-2 control-label">Observacion <span class="optional">(Opcional)</span>:</label>
+
       <div class="col-sm-4">
-        <textarea name="observacion" type="text" data-ng-model="view.historial.observacion" data-ng-maxlength="300" class="form-control" capitalize/>
+        <textarea name="observacion" type="text" data-ng-model="view.historial.observacion" data-ng-maxlength="300" class="form-control" capitalize></textarea>
         <div data-ng-messages="form.observacion.$error" data-ng-if="form.$submitted">
           <div class="has-error" data-ng-message="maxlength">Maximo 300 caracteres.</div>
         </div>
@@ -120,4 +151,5 @@
       <button sg-cancel ng-disabled="working" ui-sref="^.resumen">Cancelar</button>
     </div>
   </div>
+
 </form>
