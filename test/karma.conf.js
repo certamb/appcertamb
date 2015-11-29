@@ -32,7 +32,6 @@ module.exports = function(config) {
       'bower_components/angular-ui-utils/ui-utils.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/br-validations/releases/br-validations.js',
-      'bower_components/string-mask/src/string-mask.js',
       'bower_components/angular-input-masks/angular-input-masks-standalone.min.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/angular-ui-grid/ui-grid.js',

@@ -52,6 +52,19 @@
                         <dd data-ng-if="!view.load.historialActivo.observacion"><em>No registrado</em></dd>
                     </dl>
                 </fieldset>
+                <fieldset class="border-top" data-ng-if="view.load.persona">
+                  <legend><span class="text">Responsable</span></legend>
+                  <dl class="dl-horizontal left">
+                    <dt>Persona:</dt>
+                    <dd data-ng-bind-template="{{view.load.persona.apellidoPaterno}}&nbsp;{{view.load.persona.apellidoMaterno}},&nbsp{{view.load.persona.nombres}}"></dd>
+                    <dt>Email:</dt>
+                    <dd data-ng-if="view.load.persona.email" data-ng-bind="view.load.persona.email"></dd>
+                    <dd data-ng-if="!view.load.persona.email"><em>No registrado</em></dd>
+                    <dt>Telefono/Celular:</dt>
+                    <dd data-ng-if="view.load.persona.telefono || view.load.persona.celular" data-ng-bind-template="{{view.load.persona.telefono}}&nbsp;{{view.load.persona.celular}}"></dd>
+                    <dd data-ng-if="!(view.load.persona.telefono || view.load.persona.celular)"><em>No registrado</em></dd>
+                  </dl>
+                </fieldset>
             </div>
         </div>
     </div>

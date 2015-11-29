@@ -2,14 +2,15 @@
 
 /* jshint -W098 */
 angular.module('certamb').controller('Certamb.CertificacionAmbiental.Proyecto.Editar.ResumenController',
-  function ($scope, $state, proyecto) {
+  function ($scope, $state, proyecto, SGPersonaNatural) {
 
     $scope.view = {
       proyecto: proyecto
     };
 
     $scope.view.load = {
-      historialActivo: undefined
+      historialActivo: undefined,
+      persona: undefined
     };
 
     $scope.loadHistorial = function () {
@@ -22,6 +23,19 @@ angular.module('certamb').controller('Certamb.CertificacionAmbiental.Proyecto.Ed
       };
       $scope.view.proyecto.SGHistorialProyecto().$search(criteria).then(function (response) {
         $scope.view.load.historialActivo = response.items[0];
+
+        //Buscar responsalbe
+        if(angular.isDefined($scope.view.load.historialActivo.responsableTipoDocumento) && angular.isDefined($scope.view.load.historialActivo.responsableNumeroDocumento)){
+          var criteria = {
+            filters: [
+              {name: 'tipoDocumento.abreviatura', value: $scope.view.load.historialActivo.responsableTipoDocumento, operator: 'eq'},
+              {name: 'numeroDocumento', value: $scope.view.load.historialActivo.responsableNumeroDocumento, operator: 'eq'}
+            ], paging: {page: 1, pageSize: 20}
+          };
+          SGPersonaNatural.$search(criteria).then(function (response) {
+            $scope.view.load.persona = response.items[0];
+          });
+        }
       });
     };
     $scope.loadHistorial();
