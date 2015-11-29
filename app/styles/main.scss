@@ -2,13 +2,18 @@ $icon-font-path: "../styles/fonts/bootstrap/";
 
 $font-path: "../styles/fonts/patternfly";
 $fa-font-path: "../styles/fonts/font-awesome/";
-//$navbar-pf-bg-color: #09290f !default; //#393F45
-//$link-color: #29bb45 !default;
-//$dropdown-link-active-border-color: #18a03d !default;
-//$brand-primary: #18a03d !default;
-//$btn-primary-bg: #18a03d !default;
-//$btn-primary-border: #178934 !default;
-//$link-hover-color: #16712d !default;
+
+$navbar-pf-border-color: #93c87b !default;
+
+$navbar-pf-bg-color: #1f5135 !default;
+$link-color: #74b559 !default;
+$dropdown-link-active-border-color: #93c87b !default;
+
+$brand-primary: #63a050 !default;
+$btn-primary-bg: #83cb60 !default;
+$btn-primary-border: #60804b !default;
+
+$link-hover-color: #188635 !default;
 // bower:scss
 @import "patternfly-sass/assets/stylesheets/_patternfly.scss";
 // endbower
