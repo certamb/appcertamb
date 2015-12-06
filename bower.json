@@ -14,7 +14,7 @@
     "angular-ui-grid": "~3.0.6",
     "angular-ui-select": "~0.13.2",
     "angular-xeditable": "~0.1.9",
-    "keycloak": "1.6.1",
+    "keycloak": "1.2.0.Final",
     "kubernetes-label-selector": "~0.0.16",
     "messenger": "~1.4.2",
     "restangular": "~1.5.1",

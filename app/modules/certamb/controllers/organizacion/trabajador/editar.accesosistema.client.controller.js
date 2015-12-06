@@ -17,7 +17,8 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.Editar.Acc
     $scope.editarRolesUsuarioKeycloak = function () {
       SGUsuarioKeycloak.$search({username: $scope.view.trabajador.usuario, max: 1}).then(function (response) {
         if (response.length) {
-          $window.open(SGUsuarioKeycloak.$getRoleMappingsUserUrl(response[0].id));
+          //$window.open(SGUsuarioKeycloak.$getRoleMappingsUserUrl(response[0].id));//keycloak 1.6.1
+          $window.open(SGUsuarioKeycloak.$getRoleMappingsUserUrl(response[0].username));
         }
       });
     };
@@ -30,7 +31,8 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.Editar.Acc
         SGUsuarioKeycloak.$search({username: $scope.view.trabajador.usuario, max: 1}).then(function (response) {
           if (response.length) {
             //eliminar usuario
-            var keycloakUser = SGUsuarioKeycloak.$new(response[0].id);
+            //var keycloakUser = SGUsuarioKeycloak.$new(response[0].id);//keycloak 1.6.1
+            var keycloakUser = SGUsuarioKeycloak.$new(response[0].username);
             keycloakUser.$remove().then(
               function () {
                 toastr.success('Usuario eliminado');
