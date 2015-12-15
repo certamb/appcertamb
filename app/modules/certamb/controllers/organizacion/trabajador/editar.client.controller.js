@@ -20,7 +20,8 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.EditarCont
             function (response) {
               if (response.length) {
                 //eliminar usuario
-                var keycloakUser = SGUsuarioKeycloak.$new(response[0].id);
+                //var keycloakUser = SGUsuarioKeycloak.$new(response[0].id);
+                var keycloakUser = SGUsuarioKeycloak.$new(response[0].username);
                 keycloakUser.$remove().then(
                   function () {
                     toastr.success('Usuario eliminado');

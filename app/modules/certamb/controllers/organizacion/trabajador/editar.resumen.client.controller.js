@@ -33,7 +33,8 @@ angular.module('certamb').controller('Certamb.Organizacion.Trabajador.Editar.Res
             var usuario = $scope.view.trabajador.usuario;
             if (usuario) {
                 SGUsuarioKeycloak.$search({username: usuario, max: 1}).then(function (response1) {
-                    SGUsuarioKeycloak.$realmRoles(response1[0].id).then(function (response2) {
+                    //SGUsuarioKeycloak.$realmRoles(response1[0].id).then(function (response2) {
+                    SGUsuarioKeycloak.$realmRoles(response1[0].username).then(function (response2) {
                         for (var i = 0; i < response2.length; i++) {
                             $scope.view.loaded.userKeycloak.rolesAssigned.push(response2[i].name);
                         }
