@@ -18,6 +18,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 /* jshint ignore:start */
 window.auth = {};
 //window.auth.keycloakUrl = 'http://localhost:10948/auth';
+//window.auth.keycloakUrl = 'http://192.168.1.88:10948/auth';
 window.auth.keycloakUrl = 'http://certificacion.grarecursosnaturales.gob.pe/auth';
 window.auth.keycloakRealm = 'certamb';
 window.auth.keycloakClientId = 'certamb_app';
@@ -25,6 +26,9 @@ window.auth.keycloakClientId = 'certamb_app';
 /*window.auth.certambUrl = 'http://localhost:10948/certamb/rest';
 window.auth.personaUrl = 'http://localhost:10948/persona/rest';
 window.auth.iso3166Url = 'http://localhost:10948/iso3166/rest';*/
+/*window.auth.certambUrl = 'http://192.168.1.88:10948/certamb/rest';
+window.auth.personaUrl = 'http://192.168.1.88:10948/persona/rest';
+window.auth.iso3166Url = 'http://192.168.1.88:10948/iso3166/rest';*/
 window.auth.certambUrl = 'http://certificacion.grarecursosnaturales.gob.pe/certamb/rest';
 window.auth.personaUrl = 'http://certificacion.grarecursosnaturales.gob.pe/persona/rest';
 window.auth.iso3166Url = 'http://certificacion.grarecursosnaturales.gob.pe/iso3166/rest';
