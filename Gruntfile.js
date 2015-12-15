@@ -511,9 +511,9 @@ module.exports = function (grunt) {
       target: {
         options: {
           war_dist_folder: '<%= yeoman.dist %>',
-          war_name: 'app',
+          war_name: 'ROOT',
           webxml_welcome: 'index.html',
-          webxml_display_name: 'App',
+          webxml_display_name: 'Root',
           webxml_mime_mapping: [
             {
               extension: 'woff',
